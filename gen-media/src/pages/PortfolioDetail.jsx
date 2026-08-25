@@ -16,9 +16,7 @@ function PortfolioDetail() {
         setLoading(true);
         setError("");
 
-        const response = await fetch(
-          `http://localhost:5000/api/portfolios/${id}`,
-        );
+        const response = await fetch(`${API_URL}/api/portfolios/${id}`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch project");

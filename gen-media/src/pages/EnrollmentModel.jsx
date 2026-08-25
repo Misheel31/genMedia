@@ -27,23 +27,20 @@ function EnrollmentModal({ course, onClose }) {
     setError("");
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/enrollments/create",
-        {
-          method: "POST",
+      const response = await fetch(`${API_URL}/api/enrollments/create`, {
+        method: "POST",
 
-          headers: {
-            "Content-Type": "application/json",
-          },
-
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            course: course.title,
-          }),
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          course: course.title,
+        }),
+      });
 
       const data = await response.json();
 
