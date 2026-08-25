@@ -32,18 +32,24 @@ function Team() {
     },
     {
       number: "06",
+      name: "Ayudh",
+      role: "Dubai based Manager",
+      image: "/images/team/member-6.jpg",
+    },
+      {
+      number: "07",
       name: "Babin",
       role: "Social Media Manager",
       image: "/images/team/member-6.jpg",
     },
     {
-      number: "07",
+      number: "08",
       name: "Misheel Rai",
       role: "Developer",
       image: "/images/team/member-7.jpg",
     },
     {
-      number: "08",
+      number: "09",
       name: "Binod",
       role: "Web Developer",
       image: "/images/team/member-8.jpg",

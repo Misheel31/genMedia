@@ -4,7 +4,7 @@ function About() {
       {/* YOUR ORIGINAL ABOUT SECTION — DON'T CHANGE THIS */}
       <section
         id="about"
-        className="relative bg-white text-black pt-10 sm:pt-14 lg:pt-28 pb-24 sm:pb-32 lg:pb-40"
+        className="relative bg-white text-black py-20 sm:pt-14 lg:pt-28 pb-24 sm:pb-32 lg:pb-40"
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
