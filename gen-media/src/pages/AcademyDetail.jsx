@@ -11,9 +11,7 @@ function AcademyDetail() {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:5000/api/courses/get-courses",
-        );
+        const response = await fetch(`${API_URL}/api/courses/get-courses`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch courses");

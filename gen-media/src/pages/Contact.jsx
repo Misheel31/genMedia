@@ -21,7 +21,7 @@ function Contact() {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
 
         headers: {
@@ -77,9 +77,7 @@ function Contact() {
           {/* Section Number */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3">
-              <span className="text-sm tracking-[0.3em] text-[#2C2C2C]/40">
-                
-              </span>
+              <span className="text-sm tracking-[0.3em] text-[#2C2C2C]/40"></span>
 
               <span className="w-8 h-px bg-[#FF9800]" />
             </div>
@@ -292,9 +290,7 @@ function Contact() {
                     <span>{sending ? "Sending..." : "Send Message"}</span>
 
                     {!sending && (
-                      <span className="group-hover:translate-x-1 transition-transform duration-300">
-                        
-                      </span>
+                      <span className="group-hover:translate-x-1 transition-transform duration-300"></span>
                     )}
                   </button>
 
