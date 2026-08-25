@@ -14,7 +14,7 @@ const createPortfolio = async (req, res) => {
       featured,
     } = req.body;
 
-    if (!title || !category || !description || !image) {
+    if (!title || !category || !description) {
       return res.status(400).json({
         message: "All required fields must be provided",
       });

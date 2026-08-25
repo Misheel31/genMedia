@@ -107,7 +107,7 @@ function Services() {
       id="services"
       className="bg-[#F8F6F1] text-[#2C2C2C] pt-16 sm:pt-20 lg:pt-24 pb-24"
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+      <div className="max-w-7xl mx-auto py-10 sm:px-10 lg:px-16">
         {/* HEADER */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <p className="text-xs tracking-[0.35em] text-[#FF9800] mb-4">

@@ -93,20 +93,44 @@ function Portfolio() {
                 to={`/portfolio/${project._id}`}
                 className="group block"
               >
-                {/* IMAGE */}
-                <div className="relative overflow-hidden bg-[#F4F2ED] rounded-sm">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="
+                {/* MEDIA */}
+                <div className="relative overflow-hidden bg-[#F4F2ED] rounded-sm aspect-auto">
+                  {project.video ? (
+                    <video
+                      src={project.video}
+                      muted
+                      playsInline
+                      loop
+                      preload="metadata"
+                      className="
+                        w-full
+                          h-[500px]
+                          object-cover
+                          transition-transform
+                          duration-700
+                          group-hover:scale-105
+                        "
+                    />
+                  ) : project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="
                       w-full
-                      h-auto
-                      object-contain
+                      h-full
+                      object-cover
                       transition-transform
                       duration-700
                       group-hover:scale-105
                     "
-                  />
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-sm text-[#2C2C2C]/40">
+                        No media available
+                      </span>
+                    </div>
+                  )}
 
                   {/* Orange Overlay */}
                   <div
@@ -117,6 +141,7 @@ function Portfolio() {
                     group-hover:bg-[#FF9800]/10
                     transition-all
                     duration-500
+                    pointer-events-none
                   "
                   />
 
@@ -124,16 +149,16 @@ function Portfolio() {
                   <div className="absolute top-4 left-4">
                     <span
                       className="
-                      inline-block
-                      bg-white
-                      text-[#2C2C2C]
-                      px-4
-                      py-3
-                      text-[10px]
-                      font-medium
-                      tracking-[0.18em]
-                      uppercase
-                    "
+                    inline-block
+                    bg-white
+                    text-[#2C2C2C]
+                    px-4
+                    py-3
+                    text-[10px]
+                    font-medium
+                    tracking-[0.18em]
+                    uppercase
+                  "
                     >
                       {Array.isArray(project.category)
                         ? project.category[0]
@@ -161,18 +186,19 @@ function Portfolio() {
                     </div>
                   )}
 
+                  {/* CATALOGUE */}
                   {project.pdf && !project.video && (
                     <div className="absolute bottom-4 right-4">
                       <span
                         className="
-                          bg-white
-                          text-[#2C2C2C]
-                          px-4
-                          py-3
-                          text-[10px]
-                          tracking-[0.15em]
-                          uppercase
-                        "
+                      bg-white
+                      text-[#2C2C2C]
+                      px-4
+                      py-3
+                      text-[10px]
+                      tracking-[0.15em]
+                      uppercase
+                    "
                       >
                         CATALOGUE
                       </span>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 function PortfolioDetail() {
@@ -8,9 +8,14 @@ function PortfolioDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const videoRef = useRef(null);
+
   useEffect(() => {
     const fetchProject = async () => {
       try {
+        setLoading(true);
+        setError("");
+
         const response = await fetch(
           `http://localhost:5000/api/portfolios/${id}`,
         );
@@ -21,21 +26,53 @@ function PortfolioDetail() {
 
         const data = await response.json();
 
-        console.log("Portfolio detail:", data);
-
         setProject(data);
       } catch (err) {
-        console.error("Portfolio detail error:", err);
-        setError("Unable to load this project.");
+        console.error("Error fetching project:", err);
+        setError("Failed to load project.");
       } finally {
         setLoading(false);
       }
     };
 
-    if (id) {
-      fetchProject();
-    }
+    fetchProject();
   }, [id]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video) return;
+
+    const checkVideo = () => {
+      console.log("===== VIDEO TEST =====");
+      console.log("duration:", video.duration);
+      console.log("readyState:", video.readyState);
+      console.log("networkState:", video.networkState);
+      console.log("error:", video.error);
+    };
+
+    const handleLoadedMetadata = () => {
+      console.log("===== VIDEO METADATA LOADED =====");
+      checkVideo();
+    };
+
+    const handleError = () => {
+      console.log("===== VIDEO ERROR =====");
+      checkVideo();
+    };
+
+    video.addEventListener("loadedmetadata", handleLoadedMetadata);
+    video.addEventListener("error", handleError);
+
+    // Check immediately as well
+    checkVideo();
+
+    return () => {
+      video.removeEventListener("loadedmetadata", handleLoadedMetadata);
+
+      video.removeEventListener("error", handleError);
+    };
+  }, [project]);
 
   if (loading) {
     return (
@@ -81,10 +118,8 @@ function PortfolioDetail() {
 
   return (
     <main className="min-h-screen bg-[#F8F6F1] text-[#2C2C2C]">
-       <section className="pt-20 sm:pt-24 pb-6">
+      <section className="pt-20 sm:pt-24 pb-6">
         <div className="max-w-6xl mx-auto px-5 sm:px-6">
-          {/* BACK TO PORTFOLIO */}
-
           <Link
             to="/portfolio"
             className="
@@ -166,6 +201,7 @@ function PortfolioDetail() {
               "
             >
               <video
+                ref={videoRef}
                 src={project.video}
                 controls
                 playsInline
@@ -367,6 +403,8 @@ function PortfolioDetail() {
                 )}
               </div>
 
+              {/* SERVICES */}
+
               {project.services && project.services.length > 0 && (
                 <div className="mt-6">
                   <p
@@ -403,6 +441,8 @@ function PortfolioDetail() {
                 </div>
               )}
 
+              {/* PDF */}
+
               {project.pdf && (
                 <div className="mt-7">
                   <a
@@ -432,10 +472,6 @@ function PortfolioDetail() {
                 </div>
               )}
             </div>
-
-            {/* =================================================
-                RIGHT COLUMN
-            ================================================= */}
 
             <div>
               {project.description && (
@@ -469,10 +505,6 @@ function PortfolioDetail() {
           </div>
         </div>
       </section>
-
-      {/* =================================================
-          BACK TO ALL WORK
-      ================================================= */}
 
       <section
         className="
