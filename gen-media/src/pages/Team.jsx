@@ -36,7 +36,7 @@ function Team() {
       role: "Dubai based Manager",
       image: "/images/team/member-6.jpg",
     },
-      {
+    {
       number: "07",
       name: "Babin",
       role: "Social Media Manager",
