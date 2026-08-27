@@ -17,11 +17,11 @@ const contactController = async (req, res) => {
       subject: `New message from ${name}`,
 
       text: `
-Name: ${name}
-Email: ${email}
+      Name: ${name}
+      Email: ${email}
 
-Message:
-${message}
+      Message:
+      ${message}
       `,
     });
 
