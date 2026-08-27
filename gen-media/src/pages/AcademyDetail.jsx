@@ -7,13 +7,12 @@ function AcademyDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:5000/api/courses/get-courses",
-        );
+        const response = await fetch(`${API_URL}/api/courses/get-courses`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch courses");

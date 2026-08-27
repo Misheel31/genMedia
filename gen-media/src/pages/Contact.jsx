@@ -20,8 +20,10 @@ function Contact() {
       message: formData.get("message"),
     };
 
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
 
         headers: {
