@@ -9,6 +9,7 @@ function PortfolioDetail() {
   const [error, setError] = useState("");
 
   const videoRef = useRef(null);
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   useEffect(() => {
     const fetchProject = async () => {
