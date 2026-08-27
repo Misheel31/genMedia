@@ -1,5 +1,4 @@
 import { useState } from "react";
-import logo from "../assets/logo.png";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,7 +13,7 @@ function Navbar() {
         {/* Logo */}
         <a href="/" onClick={closeMenu} className="flex items-center">
           <img
-            src={logo}
+            src="/logo.png"
             alt="The Gen Media"
             className="w-32 sm:w-36 md:w-40 h-auto object-contain"
           />
