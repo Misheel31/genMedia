@@ -14,12 +14,18 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://gen-media-topaz.vercel.app"],
-
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: [
+      "http://localhost:5173",
+      "https://gen-media-topaz.vercel.app",
+      "https://genmedia.com.np",
+      "https://www.genmedia.com.np",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
+
+app.options("*", cors());
 
 app.use(express.json());
 
