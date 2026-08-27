@@ -1,5 +1,4 @@
 import { Mail, MapPin, Phone } from "lucide-react";
-import logo from "../assets/logo.png";
 function Footer() {
   return (
     <footer className="bg-[#2C2C2C] text-white">
@@ -81,7 +80,7 @@ function Footer() {
         >
           <div className="lg:col-span-1">
             <a href="/" className="inline-block">
-              <img src={logo} alt="Gen Media" className="w-24 h-auto" />
+              <img src="/logo.png" alt="Gen Media" className="w-24 h-auto" />
             </a>
 
             <p className="mt-3 text-xs text-white/50 leading-relaxed max-w-[180px]">
