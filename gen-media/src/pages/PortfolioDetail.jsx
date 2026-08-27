@@ -24,6 +24,10 @@ function PortfolioDetail() {
         }
 
         const data = await response.json();
+        console.log("PROJECT:", data);
+        console.log("IMAGE:", data.image);
+        console.log("VIDEO:", data.video);
+        console.log("PDF:", data.pdf);
 
         setProject(data);
       } catch (err) {
