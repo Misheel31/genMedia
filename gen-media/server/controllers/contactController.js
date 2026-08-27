@@ -10,6 +10,10 @@ const contactController = async (req, res) => {
       });
     }
 
+    console.log("Email_user:", process.env.EMAIL_USER);
+    console.log("OFFICIAL_email:", process.env.OFFICE_EMAIL);
+    console.log("EMAIL_PASSWORD exists:", !!process.env, EMAIL_PASSWORD);
+
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
