@@ -89,6 +89,8 @@ const createEnrollment = async (req, res) => {
         data,
         error,
       });
+      console.log("RESEND_FROM_EMAIL:", process.env.RESEND_FROM_EMAIL);
+      console.log("RESEND_API_KEY exists:", !!process.env.RESEND_API_KEY);
     } catch (emailError) {
       console.error("Enrollment notification email failed:", emailError);
     }
