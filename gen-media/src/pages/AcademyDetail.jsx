@@ -185,7 +185,7 @@ function AcademyDetail() {
                         className="text-[#FF9800]"
                       />
 
-                      <span>{course.price}</span>
+                      <span>{course.price}/per month</span>
                     </span>
                   </div>
 
