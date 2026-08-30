@@ -23,6 +23,13 @@ const createEnrollment = async (req, res) => {
 
     console.log("Enrollment saved to MongoDB:", enrollment._id);
 
+    // ===== RESEND DEBUG =====
+    console.log("========== RESEND DEBUG ==========");
+    console.log("RESEND_FROM_EMAIL:", process.env.RESEND_FROM_EMAIL);
+    console.log("RESEND_API_KEY exists:", !!process.env.RESEND_API_KEY);
+    console.log("OFFICE_EMAIL:", process.env.OFFICE_EMAIL);
+    console.log("==================================");
+
     // Send notification email to Gen Media
     try {
       const { data, error } = await resend.emails.send({
