@@ -25,7 +25,7 @@ const createEnrollment = async (req, res) => {
 
     // Send notification email to Gen Media
     try {
-      await resend.emails.send({
+      const { data, error } = await resend.emails.send({
         from: process.env.RESEND_FROM_EMAIL,
         to: process.env.OFFICE_EMAIL,
         subject: `New Course Enrollment - ${course}`,
@@ -85,14 +85,17 @@ const createEnrollment = async (req, res) => {
         `,
       });
 
-      console.log("Enrollment notification email sent");
+      console.log("RESEND OFFICE EMAIL RESPONSE:", {
+        data,
+        error,
+      });
     } catch (emailError) {
       console.error("Enrollment notification email failed:", emailError);
     }
 
     // Send confirmation email to student
     try {
-      await resend.emails.send({
+      const { data, error } = await resend.emails.send({
         from: process.env.RESEND_FROM_EMAIL,
         to: email,
         subject: `Enrollment Received - ${course}`,
@@ -129,7 +132,10 @@ const createEnrollment = async (req, res) => {
         `,
       });
 
-      console.log("Student confirmation email sent");
+      console.log("RESEND STUDENT EMAIL RESPONSE:", {
+        data,
+        error,
+      });
     } catch (emailError) {
       console.error("Student confirmation email failed:", emailError);
     }
