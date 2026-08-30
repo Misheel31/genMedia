@@ -43,7 +43,7 @@ function Portfolio() {
         {/* HEADER */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
           <div>
-            <p className="text-xs sm:text-sm tracking-[0.3em] text-[#FF9800] mb-4">
+            <p className="text-xs sm:text-sm tracking-[0.3em] text-[#FF9800] py-6">
               FEATURED WORK
             </p>
 
