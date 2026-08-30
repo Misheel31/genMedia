@@ -1,4 +1,4 @@
-import transporter from "../config/emailConfig.js";
+import resend from "../config/emailConfig.js";
 import Enrollment from "../models/enrollmentModel.js";
 
 const createEnrollment = async (req, res) => {
@@ -12,7 +12,7 @@ const createEnrollment = async (req, res) => {
       });
     }
 
-    // Save enrollment to MongoDB
+    // Save enrollment to MongoDB FIRST
     const enrollment = await Enrollment.create({
       name,
       email,
@@ -21,117 +21,128 @@ const createEnrollment = async (req, res) => {
       message,
     });
 
-    // Send email to company
-    await transporter.sendMail({
-      from: `"Gen Media Website" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER,
+    console.log("Enrollment saved to MongoDB:", enrollment._id);
 
-      subject: `New Course Enrollment - ${course}`,
+    // Send notification email to Gen Media
+    try {
+      await resend.emails.send({
+        from: process.env.RESEND_FROM_EMAIL,
+        to: process.env.OFFICE_EMAIL,
+        subject: `New Course Enrollment - ${course}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto;">
 
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto;">
+            <h2 style="color: #FF9800;">
+              New Course Enrollment
+            </h2>
 
-          <h2 style="color: #FF9800;">
-            New Course Enrollment
-          </h2>
+            <p>
+              Someone has submitted a new course enrollment through the
+              Gen Media website.
+            </p>
 
-          <p>
-            Someone has submitted a new course enrollment through the
-            Gen Media website.
-          </p>
+            <hr />
 
-          <hr />
+            <h3>Student Information</h3>
 
-          <h3>Student Information</h3>
+            <p>
+              <strong>Name:</strong> ${name}
+            </p>
 
-          <p>
-            <strong>Name:</strong> ${name}
-          </p>
+            <p>
+              <strong>Email:</strong> ${email}
+            </p>
 
-          <p>
-            <strong>Email:</strong> ${email}
-          </p>
+            <p>
+              <strong>Phone:</strong> ${phone}
+            </p>
 
-          <p>
-            <strong>Phone:</strong> ${phone}
-          </p>
+            <p>
+              <strong>Course:</strong> ${course}
+            </p>
 
-          <p>
-            <strong>Course:</strong> ${course}
-          </p>
+            ${
+              message
+                ? `
+                  <p>
+                    <strong>Message:</strong>
+                  </p>
 
-          ${
-            message
-              ? `
-                <p>
-                  <strong>Message:</strong>
-                </p>
+                  <p>
+                    ${message}
+                  </p>
+                `
+                : ""
+            }
 
-                <p>
-                  ${message}
-                </p>
-              `
-              : ""
-          }
+            <hr />
 
-          <hr />
+            <p style="color: #777;">
+              This enrollment was submitted from the Gen Media website.
+            </p>
 
-          <p style="color: #777;">
-            This enrollment was submitted from the Gen Media website.
-          </p>
+          </div>
+        `,
+      });
 
-        </div>
-      `,
-    });
+      console.log("Enrollment notification email sent");
+    } catch (emailError) {
+      console.error("Enrollment notification email failed:", emailError);
+    }
 
-    // Optional confirmation email to student
-    await transporter.sendMail({
-      from: `"Gen Media" <${process.env.EMAIL_USER}>`,
-      to: email,
+    // Send confirmation email to student
+    try {
+      await resend.emails.send({
+        from: process.env.RESEND_FROM_EMAIL,
+        to: email,
+        subject: `Enrollment Received - ${course}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto;">
 
-      subject: `Enrollment Received - ${course}`,
+            <h2 style="color: #FF9800;">
+              Enrollment Received
+            </h2>
 
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto;">
+            <p>Hello ${name},</p>
 
-          <h2 style="color: #FF9800;">
-            Enrollment Received
-          </h2>
+            <p>
+              Thank you for your interest in the
+              <strong>${course}</strong> course at Gen Media Academy.
+            </p>
 
-          <p>Hello ${name},</p>
+            <p>
+              We have received your enrollment request successfully.
+            </p>
 
-          <p>
-            Thank you for your interest in the
-            <strong>${course}</strong> course at Gen Media Academy.
-          </p>
+            <p>
+              Our team will contact you shortly with the next steps.
+            </p>
 
-          <p>
-            We have received your enrollment request successfully.
-          </p>
+            <br />
 
-          <p>
-            Our team will contact you shortly with the next steps.
-          </p>
+            <p>
+              Regards,<br />
+              <strong>Gen Media Academy</strong>
+            </p>
 
-          <br />
+          </div>
+        `,
+      });
 
-          <p>
-            Regards,<br />
-            <strong>Gen Media Academy</strong>
-          </p>
+      console.log("Student confirmation email sent");
+    } catch (emailError) {
+      console.error("Student confirmation email failed:", emailError);
+    }
 
-        </div>
-      `,
-    });
-
-    res.status(201).json({
+    // Enrollment was successfully saved even if email fails
+    return res.status(201).json({
       message: "Enrollment submitted successfully",
       enrollment,
     });
   } catch (error) {
     console.error("Create enrollment error:", error);
 
-    res.status(500).json({
+    return res.status(500).json({
       message: "Failed to submit enrollment",
       error: error.message,
     });
