@@ -1,3 +1,5 @@
+import resend from "../config/emailConfig.js";
+
 const contactController = async (req, res) => {
   try {
     const { name, email, message } = req.body;
