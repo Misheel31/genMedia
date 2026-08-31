@@ -171,6 +171,57 @@ function Footer() {
                   />
                 </svg>
               </a>
+              {/* LINKEDIN */}
+              <a
+                href="https://www.linkedin.com/company/thegenmedia/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="The Gen Media on LinkedIn"
+                className="
+      w-8 h-8 rounded-full border border-white/15
+      flex items-center justify-center
+      text-white/60
+      hover:border-[#FF9800]
+      hover:text-[#FF9800]
+      hover:bg-[#FF9800]/10
+      transition-all duration-300
+    "
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-[15px] h-[15px]"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M6.5 8.5H3V21h3.5V8.5ZM4.75 3A2.05 2.05 0 1 0 4.75 7.1 2.05 2.05 0 0 0 4.75 3ZM21 13.85c0-3.75-2-5.5-4.65-5.5-2.15 0-3.1 1.18-3.65 2v-1.85H9.2V21h3.5v-6.2c0-1.64.3-3.23 2.35-3.23 2.02 0 2.05 1.88 2.05 3.34V21H21v-7.15Z" />
+                </svg>
+              </a>
+
+              {/* TIKTOK */}
+              <a
+                href="https://www.tiktok.com/@thegenmedia.com.np"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="The Gen Media on TikTok"
+                className="
+      w-8 h-8 rounded-full border border-white/15
+      flex items-center justify-center
+      text-white/60
+      hover:border-[#FF9800]
+      hover:text-[#FF9800]
+      hover:bg-[#FF9800]/10
+      transition-all duration-300
+    "
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-[15px] h-[15px]"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M19.5 7.2a5.3 5.3 0 0 1-3.2-1.05v7.1a5.75 5.75 0 1 1-4.97-5.69v2.83a2.95 2.95 0 1 0 2.18 2.86V3h2.79a5.3 5.3 0 0 0 3.2 1.4V7.2Z" />
+                </svg>
+              </a>
             </div>
           </div>
 
