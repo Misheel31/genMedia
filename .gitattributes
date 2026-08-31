@@ -2,4 +2,5 @@
 *.jpg filter=lfs diff=lfs merge=lfs -text
 *.jpeg filter=lfs diff=lfs merge=lfs -text
 
-gen-media/public/teams/Megha.jpeg -filter -diff -merge
+gen-media/public/teams/*.jpg -filter -diff -merge
+gen-media/public/teams/*.jpeg -filter -diff -merge
