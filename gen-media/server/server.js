@@ -16,8 +16,8 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://gen-media-topaz.vercel.app",
-      "https://genmedia.com.np",
+      "https://thegenmedia.com.np",
+      "https://www.thegenmedia.com.np",
       "https://www.genmedia.com.np",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
