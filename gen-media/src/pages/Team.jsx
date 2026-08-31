@@ -46,7 +46,7 @@ function Team() {
       number: "08",
       name: "Misheel Rai",
       role: "Developer",
-      image: "/teams/member-7.jpg",
+      image: "/teams/Misheel.jpeg",
     },
     {
       number: "09",
