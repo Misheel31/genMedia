@@ -23,7 +23,7 @@ function FeaturedWork() {
   return (
     <section
       id="portfolio"
-      class="relative bg-white text-[#2C2C2C] py-08 sm:py-12 lg:py-16"
+      className="bg-[#F8F6F1] text-[#2C2C2C] py-20 sm:pt-16 lg:pt-40 pb-16"
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         {/* Header */}
