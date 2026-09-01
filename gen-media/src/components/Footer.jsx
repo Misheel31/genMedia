@@ -178,14 +178,14 @@ function Footer() {
                 rel="noopener noreferrer"
                 aria-label="The Gen Media on LinkedIn"
                 className="
-      w-8 h-8 rounded-full border border-white/15
-      flex items-center justify-center
-      text-white/60
-      hover:border-[#FF9800]
-      hover:text-[#FF9800]
-      hover:bg-[#FF9800]/10
-      transition-all duration-300
-    "
+                w-8 h-8 rounded-full border border-white/15
+                flex items-center justify-center
+                text-white/60
+                hover:border-[#FF9800]
+                hover:text-[#FF9800]
+                hover:bg-[#FF9800]/10
+                transition-all duration-300
+              "
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -204,14 +204,14 @@ function Footer() {
                 rel="noopener noreferrer"
                 aria-label="The Gen Media on TikTok"
                 className="
-      w-8 h-8 rounded-full border border-white/15
-      flex items-center justify-center
-      text-white/60
-      hover:border-[#FF9800]
-      hover:text-[#FF9800]
-      hover:bg-[#FF9800]/10
-      transition-all duration-300
-    "
+                w-8 h-8 rounded-full border border-white/15
+                flex items-center justify-center
+                text-white/60
+                hover:border-[#FF9800]
+                hover:text-[#FF9800]
+                hover:bg-[#FF9800]/10
+                transition-all duration-300
+              "
               >
                 <svg
                   viewBox="0 0 24 24"

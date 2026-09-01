@@ -4,6 +4,7 @@ import express from "express";
 import mongoose from "mongoose";
 
 import errorMiddleware from "./middleware/errormiddleware.js";
+import adminRoutes from "./routes/adminRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import coursesRoutes from "./routes/coursesRoutes.js";
 import enrollmentRoutes from "./routes/enrollmentRoutes.js";
@@ -37,6 +38,7 @@ app.use("/api", contactRoutes);
 app.use("/api/courses", coursesRoutes);
 app.use("/api/portfolios", portfolioRoutes);
 app.use("/api/enrollments", enrollmentRoutes);
+app.use("/api/admin", adminRoutes);
 
 // Error middleware
 app.use(errorMiddleware);
