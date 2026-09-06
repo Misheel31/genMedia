@@ -6,7 +6,7 @@ function Team() {
       role: "Founder",
       image: "/teams/Sabin.jpeg",
     },
-        {
+    {
       number: "02",
       name: "Ayudh",
       role: "Dubai based Manager",
@@ -20,39 +20,39 @@ function Team() {
     },
     {
       number: "04",
+      name: "Binod Ghale",
+      role: "Video editor/Motion Graphics",
+      image: "/teams/Binod.jpeg",
+    },
+    {
+      number: "05",
       name: "Anuj Shakya",
       role: "Video Editor",
       image: "/teams/Anuj.jpeg",
     },
     {
-      number: "05",
+      number: "06",
       name: "Megha Majhi",
       role: "Graphic Designer",
       image: "/teams/Megha.jpeg",
     },
     {
-      number: "06",
+      number: "07",
       name: "Aagya Parajuli",
       role: "Content Creator",
       image: "/teams/Aagya.jpeg",
     },
     {
-      number: "07",
+      number: "08",
       name: "Bhabin Shrestha",
       role: "Graphic Designer",
       image: "/teams/Bhabin.jpeg",
     },
     {
-      number: "08",
+      number: "09",
       name: "Misheel Rai",
       role: "Developer",
       image: "/teams/Misheel.jpeg",
-    },
-    {
-      number: "09",
-      name: "Binod Ghale",
-      role: "Video editor/Motion Graphics",
-      image: "/teams/Binod.jpeg",
     },
   ];
 
