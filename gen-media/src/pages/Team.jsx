@@ -16,7 +16,7 @@ function Team() {
       number: "03",
       name: "Akash Gurung",
       role: "Video Editor",
-      image: "/teams/Akash.jpeg",
+      image: "/teams/Akash.jpg",
     },
     {
       number: "04",
