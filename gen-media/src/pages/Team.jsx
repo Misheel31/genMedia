@@ -54,6 +54,18 @@ function Team() {
       role: "Developer",
       image: "/teams/Misheel.jpeg",
     },
+    {
+      number: "10",
+      name: "Laanan Limbu",
+      role: "Video Editor",
+      image: "/teams/Misheel.jpeg",
+    },
+     {
+      number: "11",
+      name: "Nidit Rai",
+      role: "Graphic Designer (Teacher)",
+      image: "/teams/Misheel.jpeg",
+    },
   ];
 
   return (
