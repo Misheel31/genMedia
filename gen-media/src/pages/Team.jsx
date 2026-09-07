@@ -58,13 +58,13 @@ function Team() {
       number: "10",
       name: "Laanan Limbu",
       role: "Video Editor",
-      image: "/teams/Misheel.jpeg",
+      image: "/teams/Laanan.jpeg",
     },
      {
       number: "11",
       name: "Nidit Rai",
       role: "Graphic Designer (Teacher)",
-      image: "/teams/Misheel.jpeg",
+      image: "/teams/Nidit.jpeg",
     },
   ];
 
