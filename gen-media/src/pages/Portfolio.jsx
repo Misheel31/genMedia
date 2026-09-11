@@ -90,17 +90,31 @@ function Portfolio() {
     let filtered = projects;
 
     if (selectedCategory !== "all") {
-      filtered = filtered.filter(
-        (project) =>
-          project.category?.toLowerCase() === selectedCategory.toLowerCase(),
-      );
+      filtered = filtered.filter((project) => {
+        const categories = Array.isArray(project.category)
+          ? project.category
+          : [project.category];
+
+        return categories.some(
+          (category) =>
+            typeof category === "string" &&
+            category.toLowerCase() === selectedCategory.toLowerCase(),
+        );
+      });
     }
+
     if (selectedCategory !== "all" && selectedSubcategory !== "All") {
-      filtered = filtered.filter(
-        (project) =>
-          project.subcategory?.toLowerCase() ===
-          selectedSubcategory.toLowerCase(),
-      );
+      filtered = filtered.filter((project) => {
+        const subcategories = Array.isArray(project.subcategory)
+          ? project.subcategory
+          : [project.subcategory];
+
+        return subcategories.some(
+          (subcategory) =>
+            typeof subcategory === "string" &&
+            subcategory.toLowerCase() === selectedSubcategory.toLowerCase(),
+        );
+      });
     }
 
     return filtered;
