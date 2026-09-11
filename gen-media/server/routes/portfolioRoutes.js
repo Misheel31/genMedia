@@ -6,6 +6,7 @@ import {
   getFeaturedPortfolio,
   getPortfolio,
   getPortfolioByCategory,
+  getPortfolioBySubcategory,
   getSinglePortfolio,
   updatePortfolio,
 } from "../controllers/portfolioController.js";
@@ -19,7 +20,7 @@ router.get("/", getPortfolio);
 router.get("/featured", getFeaturedPortfolio);
 
 router.get("/category/:category", getPortfolioByCategory);
-
+router.get("/category/:category/:subcategory", getPortfolioBySubcategory);
 router.get("/:id", getSinglePortfolio);
 router.put("/:id", updatePortfolio);
 

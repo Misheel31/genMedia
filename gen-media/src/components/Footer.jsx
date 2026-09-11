@@ -333,7 +333,7 @@ function Footer() {
                 />
 
                 <span>
-                  Pathari Sanishare, Morang,
+                  Pathari-Shanischare-1, Morang,
                   <br />
                   Nepal
                 </span>

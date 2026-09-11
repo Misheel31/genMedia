@@ -11,6 +11,11 @@ const portfolioSchema = new mongoose.Schema({
     required: true,
   },
 
+  subcategory: {
+    type: [String],
+    default: "",
+  },
+
   description: {
     type: String,
     required: true,

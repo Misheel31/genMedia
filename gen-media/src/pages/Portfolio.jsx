@@ -1,14 +1,61 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+const categories = [
+  {
+    name: "All",
+    value: "all",
+  },
+  {
+    name: "Branding",
+    value: "branding",
+  },
+  {
+    name: "Video",
+    value: "video",
+  },
+  {
+    name: "Photography",
+    value: "photography",
+  },
+];
+
+const subcategories = {
+  Branding: [
+    "All",
+    "Logo Design",
+    "Brand Identity",
+    "Packaging Design",
+    "Socail Media Design",
+  ],
+  Video: [
+    "All",
+    "Long Form Video",
+    "Short Form Video",
+    "Motion Graphics",
+    "Commercials",
+  ],
+  Photography: [
+    "All",
+    "Product Photography",
+    "Lifestyle Photography",
+    "Event Photography",
+    "Portrait Photography",
+  ],
+};
+
 function Portfolio() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedSubcategory, setSelectedSubcategory] = useState("All");
 
   useEffect(() => {
     const fetchPortfolio = async () => {
       try {
+        setLoading(true);
+        setError("");
         const response = await fetch(
           "https://genmedia-backend.onrender.com/api/portfolios/featured",
         );
@@ -34,6 +81,34 @@ function Portfolio() {
     fetchPortfolio();
   }, []);
 
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    setSelectedSubcategory("All");
+  };
+
+  const filteredProjects = useMemo(() => {
+    let filtered = projects;
+
+    if (selectedCategory !== "all") {
+      filtered = filtered.filter(
+        (project) =>
+          project.category?.toLowerCase() === selectedCategory.toLowerCase(),
+      );
+    }
+    if (selectedCategory !== "all" && selectedSubcategory !== "All") {
+      filtered = filtered.filter(
+        (project) =>
+          project.subcategory?.toLowerCase() ===
+          selectedSubcategory.toLowerCase(),
+      );
+    }
+
+    return filtered;
+  }, [projects, selectedCategory, selectedSubcategory]);
+
+  const currentSubcategories =
+    selectedCategory !== "all" ? subcategories[selectedCategory] : [];
+
   return (
     <section
       id="portfolio"
@@ -58,6 +133,95 @@ function Portfolio() {
             photography, video, and digital media.
           </p>
         </div>
+
+        {/* ================================================================
+            MAIN CATEGORY FILTER
+        ================================================================= */}
+
+        <div className="mb-5">
+          <div
+            className="
+              flex
+              flex-wrap
+              gap-2
+              sm:gap-3
+            "
+          >
+            {categories.map((category) => {
+              const isActive = selectedCategory === category.value;
+
+              return (
+                <button
+                  key={category.value}
+                  onClick={() => handleCategoryChange(category.value)}
+                  className={`
+                    px-4
+                    sm:px-6
+                    py-2.5
+                    text-[10px]
+                    sm:text-xs
+                    tracking-[0.12em]
+                    uppercase
+                    border
+                    transition-all
+                    duration-300
+                    ${
+                      isActive
+                        ? "bg-[#FF9800] border-[#FF9800] text-[#2C2C2C]"
+                        : "border-[#2C2C2C]/15 text-[#2C2C2C]/60 hover:border-[#FF9800] hover:text-[#FF9800]"
+                    }
+                  `}
+                >
+                  {category.name}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ================================================================
+            SUBCATEGORY FILTER
+        ================================================================= */}
+
+        {selectedCategory !== "all" && currentSubcategories.length > 0 && (
+          <div className="mb-12">
+            <div
+              className="
+                  flex
+                  flex-wrap
+                  gap-x-5
+                  gap-y-3
+                  items-center
+                "
+            >
+              {currentSubcategories.map((subcategory) => {
+                const isActive = selectedSubcategory === subcategory;
+
+                return (
+                  <button
+                    key={subcategory}
+                    onClick={() => setSelectedSubcategory(subcategory)}
+                    className={`
+                          text-[10px]
+                          sm:text-xs
+                          uppercase
+                          tracking-[0.12em]
+                          transition-colors
+                          duration-300
+                          ${
+                            isActive
+                              ? "text-[#FF9800]"
+                              : "text-[#2C2C2C]/40 hover:text-[#2C2C2C]"
+                          }
+                        `}
+                  >
+                    {subcategory}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* LOADING */}
         {loading && (
