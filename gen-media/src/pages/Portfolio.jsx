@@ -69,7 +69,7 @@ function Portfolio() {
         console.log("portfolio data:", data);
 
         // Only show the first 3 featured projects
-        setProjects(data.slice(0, 3));
+        setProjects(Array.isArray(data) ? data.slice(0, 3) : []);
       } catch (error) {
         console.error("Portfolio fetch error:", error);
         setError("Unable to load portfolio.");
@@ -87,7 +87,7 @@ function Portfolio() {
   };
 
   const filteredProjects = useMemo(() => {
-    let filtered = projects;
+    let filtered = [...projects];
 
     if (selectedCategory !== "all") {
       filtered = filtered.filter((project) => {
@@ -127,6 +127,22 @@ function Portfolio() {
   const currentSubcategories =
     selectedCategory !== "all" ? subcategories[selectedCategory] || [] : [];
 
+  const getEmptyMessage = () => {
+    if (selectedCategory === "all") {
+      return "No featured work available.";
+    }
+
+    if (selectedSubcategory !== "All") {
+      return `No ${selectedSubcategory.toLowerCase()} projects available.`;
+    }
+
+    const categoryName =
+      categories.find((category) => category.value === selectedCategory)
+        ?.name || selectedCategory;
+
+    return `No ${categoryName.toLowerCase()} projects available.`;
+  };
+
   return (
     <section
       id="portfolio"
@@ -157,20 +173,14 @@ function Portfolio() {
         ================================================================= */}
 
         <div className="mb-5">
-          <div
-            className="
-              flex
-              flex-wrap
-              gap-2
-              sm:gap-3
-            "
-          >
+          <div className="flex flex-wrap gap-2 sm:gap-3">
             {categories.map((category) => {
               const isActive = selectedCategory === category.value;
 
               return (
                 <button
                   key={category.value}
+                  type="button"
                   onClick={() => handleCategoryChange(category.value)}
                   className={`
                     px-4
@@ -203,35 +213,28 @@ function Portfolio() {
 
         {selectedCategory !== "all" && currentSubcategories.length > 0 && (
           <div className="mb-12">
-            <div
-              className="
-                  flex
-                  flex-wrap
-                  gap-x-5
-                  gap-y-3
-                  items-center
-                "
-            >
+            <div className="flex flex-wrap gap-x-5 gap-y-3 items-center">
               {currentSubcategories.map((subcategory) => {
                 const isActive = selectedSubcategory === subcategory;
 
                 return (
                   <button
                     key={subcategory}
+                    type="button"
                     onClick={() => setSelectedSubcategory(subcategory)}
                     className={`
-                          text-[10px]
-                          sm:text-xs
-                          uppercase
-                          tracking-[0.12em]
-                          transition-colors
-                          duration-300
-                          ${
-                            isActive
-                              ? "text-[#FF9800]"
-                              : "text-[#2C2C2C]/40 hover:text-[#2C2C2C]"
-                          }
-                        `}
+                        text-[10px]
+                        sm:text-xs
+                        uppercase
+                        tracking-[0.12em]
+                        transition-colors
+                        duration-300
+                        ${
+                          isActive
+                            ? "text-[#FF9800]"
+                            : "text-[#2C2C2C]/40 hover:text-[#2C2C2C]"
+                        }
+                      `}
                   >
                     {subcategory}
                   </button>
@@ -258,18 +261,16 @@ function Portfolio() {
         )}
 
         {/* NO PROJECTS */}
-        {!loading && !error && projects.length === 0 && (
+        {!loading && !error && filteredProjects.length === 0 && (
           <div className="py-20 text-center">
-            <p className="text-sm text-[#2C2C2C]/50">
-              No featured projects available.
-            </p>
+            <p className="text-sm text-[#2C2C2C]/50">{getEmptyMessage()}</p>
           </div>
         )}
 
         {/* FEATURED PROJECTS */}
-        {!loading && !error && projects.length > 0 && (
+        {!loading && !error && filteredProjects.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
+            {filteredProjects.map((project) => (
               <Link
                 key={project._id}
                 to={`/portfolio/${project._id}`}
