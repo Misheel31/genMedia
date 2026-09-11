@@ -21,21 +21,21 @@ const categories = [
 ];
 
 const subcategories = {
-  Branding: [
+  branding: [
     "All",
     "Logo Design",
     "Brand Identity",
     "Packaging Design",
-    "Socail Media Design",
+    "Social Media Design",
   ],
-  Video: [
+  video: [
     "All",
     "Long Form Video",
     "Short Form Video",
     "Motion Graphics",
     "Commercials",
   ],
-  Photography: [
+  photography: [
     "All",
     "Product Photography",
     "Lifestyle Photography",
@@ -91,11 +91,13 @@ function Portfolio() {
 
     if (selectedCategory !== "all") {
       filtered = filtered.filter((project) => {
-        const categories = Array.isArray(project.category)
+        const projectCategories = Array.isArray(project.category)
           ? project.category
-          : [project.category];
+          : project.category
+            ? [project.category]
+            : [];
 
-        return categories.some(
+        return projectCategories.some(
           (category) =>
             typeof category === "string" &&
             category.toLowerCase() === selectedCategory.toLowerCase(),
@@ -105,11 +107,13 @@ function Portfolio() {
 
     if (selectedCategory !== "all" && selectedSubcategory !== "All") {
       filtered = filtered.filter((project) => {
-        const subcategories = Array.isArray(project.subcategory)
+        const projectSubcategories = Array.isArray(project.subcategory)
           ? project.subcategory
-          : [project.subcategory];
+          : project.subcategory
+            ? [project.subcategory]
+            : [];
 
-        return subcategories.some(
+        return projectSubcategories.some(
           (subcategory) =>
             typeof subcategory === "string" &&
             subcategory.toLowerCase() === selectedSubcategory.toLowerCase(),
@@ -121,7 +125,7 @@ function Portfolio() {
   }, [projects, selectedCategory, selectedSubcategory]);
 
   const currentSubcategories =
-    selectedCategory !== "all" ? subcategories[selectedCategory] : [];
+    selectedCategory !== "all" ? subcategories[selectedCategory] || [] : [];
 
   return (
     <section
