@@ -4,6 +4,7 @@ const createPortfolio = async (req, res) => {
     const {
       title,
       category,
+      subcategory,
       description,
       image,
       pdf,
@@ -22,6 +23,7 @@ const createPortfolio = async (req, res) => {
     const project = await Portfolio.create({
       title,
       category,
+      subcategory,
       description,
       image,
       pdf,
@@ -57,8 +59,9 @@ const getPortfolio = async (req, res) => {
 
 const getFeaturedPortfolio = async (req, res) => {
   try {
-    const allProjects = await Portfolio.find();
-    const featuredProjects = await Portfolio.find({ featured: true });
+    const featuredProjects = await Portfolio.find({ featured: true }).sort({
+      createdAt: -1,
+    });
     res.status(200).json(featuredProjects);
   } catch (error) {
     console.error("Error fetching featured portfolio projects:", error);
@@ -75,11 +78,29 @@ const getPortfolioByCategory = async (req, res) => {
     const { category } = req.params;
     const projects = await Portfolio.find({
       category: { $regex: `^${category}$`, $options: "i" },
-    });
+    }).sort({ createdAt: -1 });
     res.status(200).json(projects);
   } catch (error) {
+    console.error("Get portfolio by category:", error);
     res.status(500).json({
       message: "Error fetching portfolio projects by category",
+      error: error.message,
+    });
+  }
+};
+
+const getPortfolioBySubcategory = async (req, res) => {
+  try {
+    const { category, subcategory } = req.params;
+    const projects = await Portfolio.find({
+      category: { $regex: `^${category}$`, $options: "i" },
+      subcategory: { $regex: `^${subcategory}$`, $options: "i" },
+    }).sort({ createdAt: -1 });
+    res.status(200).json(projects);
+  } catch (error) {
+    console.error("Get portfolio by subcategory:", error);
+    res.status(500).json({
+      message: "Error fetching portfolio projects by subcategory",
       error: error.message,
     });
   }
@@ -162,6 +183,7 @@ export {
   getFeaturedPortfolio,
   getPortfolio,
   getPortfolioByCategory,
+  getPortfolioBySubcategory,
   getSinglePortfolio,
   updatePortfolio,
 };
