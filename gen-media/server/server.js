@@ -10,7 +10,7 @@ import coursesRoutes from "./routes/coursesRoutes.js";
 import enrollmentRoutes from "./routes/enrollmentRoutes.js";
 import portfolioRoutes from "./routes/portfolioRoutes.js";
 dotenv.config();
-
+ 
 const app = express();
 
 app.use(
