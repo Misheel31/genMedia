@@ -9,6 +9,7 @@ const createPortfolio = async (req, res) => {
       image,
       pdf,
       video,
+      videoThumbnail,
       client,
       year,
       services,
@@ -28,6 +29,7 @@ const createPortfolio = async (req, res) => {
       image,
       pdf,
       video,
+      videoThumbnail,
       client,
       year,
       services,
@@ -177,6 +179,46 @@ const deletePortfolio = async (req, res) => {
   }
 };
 
+const searchPortfolios = async (req, res) => {
+  console.log("SEARCH ROUTE HIT");
+  console.log("Search query:", req.query);
+
+  try {
+    const { q } = req.query;
+
+    if (!q || !q.trim()) {
+      return res.status(200).json([]);
+    }
+
+    const regex = new RegExp(q.trim(), "i");
+
+    const projects = await Portfolio.find({
+      $or: [
+        { title: regex },
+        { category: regex },
+        { subcategory: regex },
+        { description: regex },
+        { services: regex },
+        { client: regex },
+        { pdf: regex },
+        { video: regex },
+        { videoThumbnail: regex },
+      ],
+    });
+
+    console.log("SEARCH RESULTS:", projects);
+
+    return res.status(200).json(projects);
+  } catch (error) {
+    console.error("SEARCH ERROR:", error);
+
+    return res.status(500).json({
+      message: "Search failed",
+      error: error.message,
+    });
+  }
+};
+
 export {
   createPortfolio,
   deletePortfolio,
@@ -185,5 +227,6 @@ export {
   getPortfolioByCategory,
   getPortfolioBySubcategory,
   getSinglePortfolio,
+  searchPortfolios,
   updatePortfolio,
 };
