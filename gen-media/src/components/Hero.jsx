@@ -265,6 +265,565 @@
 
 // export default Hero;
 
+// import {
+//   ArrowRight,
+//   Camera,
+//   Code2,
+//   GraduationCap,
+//   MoveUpRight,
+//   Palette,
+//   Video,
+// } from "lucide-react";
+// import { Link } from "react-router-dom";
+
+// function Home() {
+//   return (
+//     <main className="relative min-h-screen overflow-hidden bg-[#F8F6F1] text-[#2C2C2C]">
+//       {/* =====================================================
+//           BLURRED BACKGROUND
+//       ====================================================== */}
+//       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+//         {/* Main blurred background */}
+//         <div
+//           className="
+//             absolute
+//             inset-[-80px]
+//             bg-cover
+//             bg-center
+//             scale-110
+//             blur-2xl
+//             opacity-35
+//           "
+//           style={{
+//             backgroundImage: "url('/images/genmedia-background.jpg')",
+//           }}
+//         />
+
+//         {/* Cream overlay */}
+//         <div className="absolute inset-0 bg-[#F8F6F1]/75" />
+
+//         {/* Soft orange glow */}
+//         <div
+//           className="
+//             absolute
+//             top-20
+//             right-[-100px]
+//             w-[400px]
+//             h-[400px]
+//             rounded-full
+//             bg-[#FF9800]/15
+//             blur-[100px]
+//           "
+//         />
+
+//         <div
+//           className="
+//             absolute
+//             bottom-[-150px]
+//             left-[-100px]
+//             w-[450px]
+//             h-[450px]
+//             rounded-full
+//             bg-[#2C2C2C]/10
+//             blur-[120px]
+//           "
+//         />
+//       </div>
+
+//       {/* =====================================================
+//           CONTENT
+//       ====================================================== */}
+//       <div className="relative z-10">
+//         {/* =================================================
+//             HERO INTRO
+//         ================================================== */}
+//         <section
+//           className="
+//             px-6
+//             sm:px-10
+//             lg:px-16
+//             xl:px-24
+//             pt-32
+//             pb-12
+//           "
+//         >
+//           <div className="max-w-7xl mx-auto text-center">
+//             {/* Small label */}
+//             <p
+//               className="
+//                 text-xs
+//                 sm:text-sm
+//                 tracking-[0.35em]
+//                 text-[#2C2C2C]/55
+//                 mb-6
+//               "
+//             >
+//               CREATIVE MEDIA & EDUCATION
+//             </p>
+
+//             {/* Main heading */}
+//             <h1
+//               className="
+//                 text-5xl
+//                 sm:text-6xl
+//                 md:text-7xl
+//                 lg:text-8xl
+//                 font-light
+//                 tracking-tight
+//                 leading-none
+//               "
+//             >
+//               Capturing{" "}
+//               <span className="font-semibold italic text-[#FF9800]">
+//                 Vision.
+//               </span>
+//             </h1>
+
+//             {/* Description */}
+//             <p
+//               className="
+//                 max-w-2xl
+//                 mx-auto
+//                 mt-7
+//                 text-base
+//                 sm:text-lg
+//                 leading-relaxed
+//                 text-[#2C2C2C]/60
+//               "
+//             >
+//               We transform ideas into powerful visual experiences through
+//               creativity, design, photography, video and digital media.
+//             </p>
+//           </div>
+//         </section>
+
+//         {/* =================================================
+//             TWO MAIN SECTIONS
+//         ================================================== */}
+//         <section
+//           className="
+//             px-6
+//             sm:px-10
+//             lg:px-16
+//             xl:px-24
+//             pb-24
+//           "
+//         >
+//           <div className="max-w-7xl mx-auto">
+//             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+//               {/* =================================================
+//                   ACADEMY CARD
+//               ================================================== */}
+//               <Link
+//                 to="/academy"
+//                 className="
+//                   group
+//                   relative
+//                   min-h-[480px]
+//                   lg:min-h-[520px]
+//                   overflow-hidden
+//                   rounded-[28px]
+//                   bg-[#2C2C2C]
+//                   text-white
+//                   shadow-2xl
+//                   transition-all
+//                   duration-500
+//                   hover:-translate-y-1
+//                 "
+//               >
+//                 {/* Background image */}
+//                 <div
+//                   className="
+//                     absolute
+//                     inset-0
+//                     bg-cover
+//                     bg-center
+//                     transition-transform
+//                     duration-700
+//                     group-hover:scale-105
+//                   "
+//                   style={{
+//                     backgroundImage: "url('/images/academy.jpg')",
+//                   }}
+//                 />
+
+//                 {/* Dark overlay */}
+//                 <div
+//                   className="
+//                     absolute
+//                     inset-0
+//                     bg-gradient-to-t
+//                     from-black/90
+//                     via-black/55
+//                     to-black/20
+//                   "
+//                 />
+
+//                 {/* Content */}
+//                 <div className="relative z-10 h-full min-h-[480px] lg:min-h-[520px] p-8 sm:p-10 lg:p-12 flex flex-col justify-between">
+//                   {/* Top */}
+//                   <div className="flex items-center justify-between">
+//                     <div className="flex items-center gap-4">
+//                       <div
+//                         className="
+//                           w-12
+//                           h-12
+//                           rounded-xl
+//                           border
+//                           border-[#FF9800]
+//                           flex
+//                           items-center
+//                           justify-center
+//                           text-[#FF9800]
+//                         "
+//                       >
+//                         <GraduationCap size={25} />
+//                       </div>
+
+//                       <div>
+//                         <p className="text-xs tracking-[0.2em] text-white/50">
+//                           GEN MEDIA
+//                         </p>
+
+//                         <p className="text-sm tracking-[0.15em] font-medium">
+//                           ACADEMY
+//                         </p>
+//                       </div>
+//                     </div>
+
+//                     <div
+//                       className="
+//                         w-10
+//                         h-10
+//                         rounded-full
+//                         border
+//                         border-white/30
+//                         flex
+//                         items-center
+//                         justify-center
+//                         group-hover:bg-[#FF9800]
+//                         group-hover:border-[#FF9800]
+//                         group-hover:text-[#2C2C2C]
+//                         transition-all
+//                       "
+//                     >
+//                       <MoveUpRight size={19} />
+//                     </div>
+//                   </div>
+
+//                   {/* Bottom */}
+//                   <div>
+//                     <p className="text-xs tracking-[0.25em] text-[#FF9800] mb-5">
+//                       LEARN • CREATE • GROW
+//                     </p>
+
+//                     <h2
+//                       className="
+//                         text-4xl
+//                         sm:text-5xl
+//                         font-semibold
+//                         leading-[0.95]
+//                         max-w-lg
+//                       "
+//                     >
+//                       Learn the skills
+//                       <br />
+//                       to <span className="text-[#FF9800]">create.</span>
+//                     </h2>
+
+//                     <p
+//                       className="
+//                         mt-6
+//                         max-w-lg
+//                         text-sm
+//                         sm:text-base
+//                         leading-relaxed
+//                         text-white/65
+//                       "
+//                     >
+//                       Practical, hands-on courses in Graphic Design, Video
+//                       Editing and more. Build your skills and turn your
+//                       creativity into a profession.
+//                     </p>
+
+//                     {/* Course tags */}
+//                     <div className="flex flex-wrap gap-3 mt-7">
+//                       <span className="flex items-center gap-2 text-xs text-white/80">
+//                         <Palette size={16} className="text-[#FF9800]" />
+//                         Graphic Design
+//                       </span>
+
+//                       <span className="w-px h-4 bg-white/20" />
+
+//                       <span className="flex items-center gap-2 text-xs text-white/80">
+//                         <Video size={16} className="text-[#FF9800]" />
+//                         Video Editing
+//                       </span>
+
+//                       <span className="w-px h-4 bg-white/20" />
+
+//                       <span className="flex items-center gap-2 text-xs text-white/80">
+//                         <Code2 size={16} className="text-[#FF9800]" />
+//                         Web Design
+//                       </span>
+//                     </div>
+
+//                     {/* CTA */}
+//                     <div className="mt-8">
+//                       <span
+//                         className="
+//                           inline-flex
+//                           items-center
+//                           gap-3
+//                           bg-[#FF9800]
+//                           text-[#2C2C2C]
+//                           px-6
+//                           py-3.5
+//                           rounded-full
+//                           text-sm
+//                           font-medium
+//                           group-hover:gap-5
+//                           transition-all
+//                         "
+//                       >
+//                         EXPLORE COURSES
+//                         <ArrowRight size={17} />
+//                       </span>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </Link>
+
+//               {/* =================================================
+//                   AGENCY CARD
+//               ================================================== */}
+//               <Link
+//                 to="/portfolio"
+//                 className="
+//                   group
+//                   relative
+//                   min-h-[480px]
+//                   lg:min-h-[520px]
+//                   overflow-hidden
+//                   rounded-[28px]
+//                   bg-[#2C2C2C]
+//                   text-white
+//                   shadow-2xl
+//                   transition-all
+//                   duration-500
+//                   hover:-translate-y-1
+//                 "
+//               >
+//                 {/* Background image */}
+//                 <div
+//                   className="
+//                     absolute
+//                     inset-0
+//                     bg-cover
+//                     bg-center
+//                     transition-transform
+//                     duration-700
+//                     group-hover:scale-105
+//                   "
+//                   style={{
+//                     backgroundImage: "url('/images/agency.jpg')",
+//                   }}
+//                 />
+
+//                 {/* Dark overlay */}
+//                 <div
+//                   className="
+//                     absolute
+//                     inset-0
+//                     bg-gradient-to-t
+//                     from-black/90
+//                     via-black/55
+//                     to-black/15
+//                   "
+//                 />
+
+//                 {/* Content */}
+//                 <div className="relative z-10 h-full min-h-[480px] lg:min-h-[520px] p-8 sm:p-10 lg:p-12 flex flex-col justify-between">
+//                   {/* Top */}
+//                   <div className="flex items-center justify-between">
+//                     <div className="flex items-center gap-4">
+//                       <div
+//                         className="
+//                           w-12
+//                           h-12
+//                           rounded-xl
+//                           border
+//                           border-[#FF9800]
+//                           flex
+//                           items-center
+//                           justify-center
+//                           text-[#FF9800]
+//                         "
+//                       >
+//                         <Camera size={24} />
+//                       </div>
+
+//                       <div>
+//                         <p className="text-xs tracking-[0.2em] text-white/50">
+//                           GEN MEDIA
+//                         </p>
+
+//                         <p className="text-sm tracking-[0.15em] font-medium">
+//                           AGENCY
+//                         </p>
+//                       </div>
+//                     </div>
+
+//                     <div
+//                       className="
+//                         w-10
+//                         h-10
+//                         rounded-full
+//                         border
+//                         border-white/30
+//                         flex
+//                         items-center
+//                         justify-center
+//                         group-hover:bg-[#FF9800]
+//                         group-hover:border-[#FF9800]
+//                         group-hover:text-[#2C2C2C]
+//                         transition-all
+//                       "
+//                     >
+//                       <MoveUpRight size={19} />
+//                     </div>
+//                   </div>
+
+//                   {/* Bottom */}
+//                   <div>
+//                     <p className="text-xs tracking-[0.25em] text-[#FF9800] mb-5">
+//                       DESIGN • MEDIA • PRODUCTION
+//                     </p>
+
+//                     <h2
+//                       className="
+//                         text-4xl
+//                         sm:text-5xl
+//                         font-semibold
+//                         leading-[0.95]
+//                         max-w-lg
+//                       "
+//                     >
+//                       We create
+//                       <br />
+//                       <span className="text-[#FF9800]">for brands.</span>
+//                     </h2>
+
+//                     <p
+//                       className="
+//                         mt-6
+//                         max-w-lg
+//                         text-sm
+//                         sm:text-base
+//                         leading-relaxed
+//                         text-white/65
+//                       "
+//                     >
+//                       From branding and graphic design to video production and
+//                       photography, we help businesses tell their story through
+//                       powerful visuals.
+//                     </p>
+
+//                     {/* Services */}
+//                     <div className="flex flex-wrap gap-x-4 gap-y-3 mt-7">
+//                       <span className="flex items-center gap-2 text-xs text-white/80">
+//                         <Palette size={16} className="text-[#FF9800]" />
+//                         Branding
+//                       </span>
+
+//                       <span className="w-px h-4 bg-white/20" />
+
+//                       <span className="flex items-center gap-2 text-xs text-white/80">
+//                         <Palette size={16} className="text-[#FF9800]" />
+//                         Graphic Design
+//                       </span>
+
+//                       <span className="w-px h-4 bg-white/20" />
+
+//                       <span className="flex items-center gap-2 text-xs text-white/80">
+//                         <Video size={16} className="text-[#FF9800]" />
+//                         Video
+//                       </span>
+
+//                       <span className="w-px h-4 bg-white/20" />
+
+//                       <span className="flex items-center gap-2 text-xs text-white/80">
+//                         <Camera size={16} className="text-[#FF9800]" />
+//                         Photography
+//                       </span>
+//                     </div>
+
+//                     {/* CTA */}
+//                     <div className="mt-8">
+//                       <span
+//                         className="
+//                           inline-flex
+//                           items-center
+//                           gap-3
+//                           border
+//                           border-[#FF9800]
+//                           text-white
+//                           px-6
+//                           py-3.5
+//                           rounded-full
+//                           text-sm
+//                           font-medium
+//                           group-hover:bg-[#FF9800]
+//                           group-hover:text-[#2C2C2C]
+//                           group-hover:gap-5
+//                           transition-all
+//                         "
+//                       >
+//                         VIEW OUR WORK
+//                         <ArrowRight size={17} />
+//                       </span>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </Link>
+//             </div>
+//           </div>
+//         </section>
+
+//         {/* =================================================
+//             SMALL BOTTOM STATEMENT
+//         ================================================== */}
+//         <section className="px-6 sm:px-10 lg:px-16 xl:px-24 pb-20">
+//           <div
+//             className="
+//               max-w-7xl
+//               mx-auto
+//               border-t
+//               border-[#2C2C2C]/10
+//               pt-8
+//               flex
+//               flex-col
+//               sm:flex-row
+//               justify-between
+//               gap-4
+//               text-xs
+//               tracking-[0.15em]
+//               text-[#2C2C2C]/45
+//             "
+//           >
+//             <span>CREATIVE MEDIA & DESIGN</span>
+
+//             <span>NEPAL · 2026</span>
+//           </div>
+//         </section>
+//       </div>
+//     </main>
+//   );
+// }
+
+// export default Home;
+
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   Camera,
@@ -277,23 +836,93 @@ import {
 import { Link } from "react-router-dom";
 
 function Home() {
+  // -------------------------------------------------------
+  // Animation presets
+  // -------------------------------------------------------
+
+  const fadeUp = {
+    hidden: {
+      opacity: 0,
+      y: 40,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const fadeLeft = {
+    hidden: {
+      opacity: 0,
+      x: -70,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.9,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const fadeRight = {
+    hidden: {
+      opacity: 0,
+      x: 70,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.9,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const staggerContainer = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  };
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#F8F6F1] text-[#2C2C2C]">
       {/* =====================================================
-          BLURRED BACKGROUND
+          BACKGROUND
       ====================================================== */}
+
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Main blurred background */}
-        <div
+        <motion.div
           className="
             absolute
             inset-[-80px]
             bg-cover
             bg-center
-            scale-110
             blur-2xl
             opacity-35
           "
+          initial={{
+            scale: 1.08,
+          }}
+          animate={{
+            scale: 1.12,
+          }}
+          transition={{
+            duration: 12,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
           style={{
             backgroundImage: "url('/images/genmedia-background.jpg')",
           }}
@@ -303,7 +932,7 @@ function Home() {
         <div className="absolute inset-0 bg-[#F8F6F1]/75" />
 
         {/* Soft orange glow */}
-        <div
+        <motion.div
           className="
             absolute
             top-20
@@ -314,9 +943,19 @@ function Home() {
             bg-[#FF9800]/15
             blur-[100px]
           "
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 25, 0],
+            scale: [1, 1.08, 1],
+          }}
+          transition={{
+            duration: 10,
+            ease: "easeInOut",
+            repeat: Infinity,
+          }}
         />
 
-        <div
+        <motion.div
           className="
             absolute
             bottom-[-150px]
@@ -327,16 +966,28 @@ function Home() {
             bg-[#2C2C2C]/10
             blur-[120px]
           "
+          animate={{
+            x: [0, 25, 0],
+            y: [0, -20, 0],
+            scale: [1, 1.05, 1],
+          }}
+          transition={{
+            duration: 12,
+            ease: "easeInOut",
+            repeat: Infinity,
+          }}
         />
       </div>
 
       {/* =====================================================
           CONTENT
       ====================================================== */}
+
       <div className="relative z-10">
         {/* =================================================
             HERO INTRO
         ================================================== */}
+
         <section
           className="
             px-6
@@ -347,9 +998,15 @@ function Home() {
             pb-12
           "
         >
-          <div className="max-w-7xl mx-auto text-center">
+          <motion.div
+            className="max-w-7xl mx-auto text-center"
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+          >
             {/* Small label */}
-            <p
+            <motion.p
+              variants={fadeUp}
               className="
                 text-xs
                 sm:text-sm
@@ -359,10 +1016,11 @@ function Home() {
               "
             >
               CREATIVE MEDIA & EDUCATION
-            </p>
+            </motion.p>
 
             {/* Main heading */}
-            <h1
+            <motion.h1
+              variants={fadeUp}
               className="
                 text-5xl
                 sm:text-6xl
@@ -374,13 +1032,24 @@ function Home() {
               "
             >
               Capturing{" "}
-              <span className="font-semibold italic text-[#FF9800]">
+              <motion.span
+                className="font-semibold italic text-[#FF9800] inline-block"
+                animate={{
+                  y: [0, -4, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                }}
+              >
                 Vision.
-              </span>
-            </h1>
+              </motion.span>
+            </motion.h1>
 
             {/* Description */}
-            <p
+            <motion.p
+              variants={fadeUp}
               className="
                 max-w-2xl
                 mx-auto
@@ -393,13 +1062,14 @@ function Home() {
             >
               We transform ideas into powerful visual experiences through
               creativity, design, photography, video and digital media.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
         </section>
 
         {/* =================================================
             TWO MAIN SECTIONS
         ================================================== */}
+
         <section
           className="
             px-6
@@ -414,378 +1084,504 @@ function Home() {
               {/* =================================================
                   ACADEMY CARD
               ================================================== */}
-              <Link
-                to="/academy"
-                className="
-                  group
-                  relative
-                  min-h-[480px]
-                  lg:min-h-[520px]
-                  overflow-hidden
-                  rounded-[28px]
-                  bg-[#2C2C2C]
-                  text-white
-                  shadow-2xl
-                  transition-all
-                  duration-500
-                  hover:-translate-y-1
-                "
+
+              <motion.div
+                variants={fadeLeft}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{
+                  once: true,
+                  amount: 0.2,
+                }}
               >
-                {/* Background image */}
-                <div
+                <Link
+                  to="/academy"
                   className="
-                    absolute
-                    inset-0
-                    bg-cover
-                    bg-center
-                    transition-transform
-                    duration-700
-                    group-hover:scale-105
+                    group
+                    relative
+                    min-h-[480px]
+                    lg:min-h-[520px]
+                    overflow-hidden
+                    rounded-[28px]
+                    bg-[#2C2C2C]
+                    text-white
+                    shadow-2xl
+                    transition-all
+                    duration-500
+                    hover:-translate-y-1
+                    block
                   "
-                  style={{
-                    backgroundImage: "url('/images/academy.jpg')",
-                  }}
-                />
+                >
+                  {/* Background image */}
+                  <motion.div
+                    className="
+                      absolute
+                      inset-0
+                      bg-cover
+                      bg-center
+                    "
+                    style={{
+                      backgroundImage: "url('/images/academy.jpg')",
+                    }}
+                    whileHover={{
+                      scale: 1.06,
+                    }}
+                    transition={{
+                      duration: 0.8,
+                      ease: "easeOut",
+                    }}
+                  />
 
-                {/* Dark overlay */}
-                <div
-                  className="
-                    absolute
-                    inset-0
-                    bg-gradient-to-t
-                    from-black/90
-                    via-black/55
-                    to-black/20
-                  "
-                />
+                  {/* Dark overlay */}
+                  <div
+                    className="
+                      absolute
+                      inset-0
+                      bg-gradient-to-t
+                      from-black/90
+                      via-black/55
+                      to-black/20
+                    "
+                  />
 
-                {/* Content */}
-                <div className="relative z-10 h-full min-h-[480px] lg:min-h-[520px] p-8 sm:p-10 lg:p-12 flex flex-col justify-between">
-                  {/* Top */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div
+                  {/* Content */}
+                  <div
+                    className="
+                      relative
+                      z-10
+                      h-full
+                      min-h-[480px]
+                      lg:min-h-[520px]
+                      p-8
+                      sm:p-10
+                      lg:p-12
+                      flex
+                      flex-col
+                      justify-between
+                    "
+                  >
+                    {/* Top */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <motion.div
+                          className="
+                            w-12
+                            h-12
+                            rounded-xl
+                            border
+                            border-[#FF9800]
+                            flex
+                            items-center
+                            justify-center
+                            text-[#FF9800]
+                          "
+                          whileHover={{
+                            rotate: 5,
+                            scale: 1.08,
+                          }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                          }}
+                        >
+                          <GraduationCap size={25} />
+                        </motion.div>
+
+                        <div>
+                          <p className="text-xs tracking-[0.2em] text-white/50">
+                            GEN MEDIA
+                          </p>
+
+                          <p className="text-sm tracking-[0.15em] font-medium">
+                            ACADEMY
+                          </p>
+                        </div>
+                      </div>
+
+                      <motion.div
                         className="
-                          w-12
-                          h-12
-                          rounded-xl
+                          w-10
+                          h-10
+                          rounded-full
                           border
-                          border-[#FF9800]
+                          border-white/30
                           flex
                           items-center
                           justify-center
-                          text-[#FF9800]
-                        "
-                      >
-                        <GraduationCap size={25} />
-                      </div>
-
-                      <div>
-                        <p className="text-xs tracking-[0.2em] text-white/50">
-                          GEN MEDIA
-                        </p>
-
-                        <p className="text-sm tracking-[0.15em] font-medium">
-                          ACADEMY
-                        </p>
-                      </div>
-                    </div>
-
-                    <div
-                      className="
-                        w-10
-                        h-10
-                        rounded-full
-                        border
-                        border-white/30
-                        flex
-                        items-center
-                        justify-center
-                        group-hover:bg-[#FF9800]
-                        group-hover:border-[#FF9800]
-                        group-hover:text-[#2C2C2C]
-                        transition-all
-                      "
-                    >
-                      <MoveUpRight size={19} />
-                    </div>
-                  </div>
-
-                  {/* Bottom */}
-                  <div>
-                    <p className="text-xs tracking-[0.25em] text-[#FF9800] mb-5">
-                      LEARN • CREATE • GROW
-                    </p>
-
-                    <h2
-                      className="
-                        text-4xl
-                        sm:text-5xl
-                        font-semibold
-                        leading-[0.95]
-                        max-w-lg
-                      "
-                    >
-                      Learn the skills
-                      <br />
-                      to <span className="text-[#FF9800]">create.</span>
-                    </h2>
-
-                    <p
-                      className="
-                        mt-6
-                        max-w-lg
-                        text-sm
-                        sm:text-base
-                        leading-relaxed
-                        text-white/65
-                      "
-                    >
-                      Practical, hands-on courses in Graphic Design, Video
-                      Editing and more. Build your skills and turn your
-                      creativity into a profession.
-                    </p>
-
-                    {/* Course tags */}
-                    <div className="flex flex-wrap gap-3 mt-7">
-                      <span className="flex items-center gap-2 text-xs text-white/80">
-                        <Palette size={16} className="text-[#FF9800]" />
-                        Graphic Design
-                      </span>
-
-                      <span className="w-px h-4 bg-white/20" />
-
-                      <span className="flex items-center gap-2 text-xs text-white/80">
-                        <Video size={16} className="text-[#FF9800]" />
-                        Video Editing
-                      </span>
-
-                      <span className="w-px h-4 bg-white/20" />
-
-                      <span className="flex items-center gap-2 text-xs text-white/80">
-                        <Code2 size={16} className="text-[#FF9800]" />
-                        Web Design
-                      </span>
-                    </div>
-
-                    {/* CTA */}
-                    <div className="mt-8">
-                      <span
-                        className="
-                          inline-flex
-                          items-center
-                          gap-3
-                          bg-[#FF9800]
-                          text-[#2C2C2C]
-                          px-6
-                          py-3.5
-                          rounded-full
-                          text-sm
-                          font-medium
-                          group-hover:gap-5
+                          group-hover:bg-[#FF9800]
+                          group-hover:border-[#FF9800]
+                          group-hover:text-[#2C2C2C]
                           transition-all
                         "
+                        whileHover={{
+                          rotate: 45,
+                          scale: 1.1,
+                        }}
                       >
-                        EXPLORE COURSES
-                        <ArrowRight size={17} />
-                      </span>
+                        <MoveUpRight size={19} />
+                      </motion.div>
                     </div>
+
+                    {/* Bottom */}
+                    <motion.div
+                      initial={{
+                        opacity: 0.85,
+                        y: 10,
+                      }}
+                      whileInView={{
+                        opacity: 1,
+                        y: 0,
+                      }}
+                      viewport={{
+                        once: true,
+                      }}
+                      transition={{
+                        duration: 0.6,
+                        delay: 0.2,
+                      }}
+                    >
+                      <p className="text-xs tracking-[0.25em] text-[#FF9800] mb-5">
+                        LEARN • CREATE • GROW
+                      </p>
+
+                      <h2
+                        className="
+                          text-4xl
+                          sm:text-5xl
+                          font-semibold
+                          leading-[0.95]
+                          max-w-lg
+                        "
+                      >
+                        Learn the skills
+                        <br />
+                        to <span className="text-[#FF9800]">create.</span>
+                      </h2>
+
+                      <p
+                        className="
+                          mt-6
+                          max-w-lg
+                          text-sm
+                          sm:text-base
+                          leading-relaxed
+                          text-white/65
+                        "
+                      >
+                        Practical, hands-on courses in Graphic Design, Video
+                        Editing and more. Build your skills and turn your
+                        creativity into a profession.
+                      </p>
+
+                      {/* Course tags */}
+                      <div className="flex flex-wrap gap-3 mt-7">
+                        <span className="flex items-center gap-2 text-xs text-white/80">
+                          <Palette size={16} className="text-[#FF9800]" />
+                          Graphic Design
+                        </span>
+
+                        <span className="w-px h-4 bg-white/20" />
+
+                        <span className="flex items-center gap-2 text-xs text-white/80">
+                          <Video size={16} className="text-[#FF9800]" />
+                          Video Editing
+                        </span>
+
+                        <span className="w-px h-4 bg-white/20" />
+
+                        <span className="flex items-center gap-2 text-xs text-white/80">
+                          <Code2 size={16} className="text-[#FF9800]" />
+                          Web Design
+                        </span>
+                      </div>
+
+                      {/* CTA */}
+                      <div className="mt-8">
+                        <motion.span
+                          className="
+                            inline-flex
+                            items-center
+                            gap-3
+                            bg-[#FF9800]
+                            text-[#2C2C2C]
+                            px-6
+                            py-3.5
+                            rounded-full
+                            text-sm
+                            font-medium
+                          "
+                          whileHover={{
+                            gap: "1.25rem",
+                            scale: 1.03,
+                          }}
+                          transition={{
+                            duration: 0.25,
+                          }}
+                        >
+                          EXPLORE COURSES
+                          <ArrowRight size={17} />
+                        </motion.span>
+                      </div>
+                    </motion.div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
 
               {/* =================================================
                   AGENCY CARD
               ================================================== */}
-              <Link
-                to="/portfolio"
-                className="
-                  group
-                  relative
-                  min-h-[480px]
-                  lg:min-h-[520px]
-                  overflow-hidden
-                  rounded-[28px]
-                  bg-[#2C2C2C]
-                  text-white
-                  shadow-2xl
-                  transition-all
-                  duration-500
-                  hover:-translate-y-1
-                "
+
+              <motion.div
+                variants={fadeRight}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{
+                  once: true,
+                  amount: 0.2,
+                }}
               >
-                {/* Background image */}
-                <div
+                <Link
+                  to="/portfolio"
                   className="
-                    absolute
-                    inset-0
-                    bg-cover
-                    bg-center
-                    transition-transform
-                    duration-700
-                    group-hover:scale-105
+                    group
+                    relative
+                    min-h-[480px]
+                    lg:min-h-[520px]
+                    overflow-hidden
+                    rounded-[28px]
+                    bg-[#2C2C2C]
+                    text-white
+                    shadow-2xl
+                    transition-all
+                    duration-500
+                    hover:-translate-y-1
+                    block
                   "
-                  style={{
-                    backgroundImage: "url('/images/agency.jpg')",
-                  }}
-                />
+                >
+                  {/* Background image */}
+                  <motion.div
+                    className="
+                      absolute
+                      inset-0
+                      bg-cover
+                      bg-center
+                    "
+                    style={{
+                      backgroundImage: "url('/images/agency.jpg')",
+                    }}
+                    whileHover={{
+                      scale: 1.06,
+                    }}
+                    transition={{
+                      duration: 0.8,
+                      ease: "easeOut",
+                    }}
+                  />
 
-                {/* Dark overlay */}
-                <div
-                  className="
-                    absolute
-                    inset-0
-                    bg-gradient-to-t
-                    from-black/90
-                    via-black/55
-                    to-black/15
-                  "
-                />
+                  {/* Dark overlay */}
+                  <div
+                    className="
+                      absolute
+                      inset-0
+                      bg-gradient-to-t
+                      from-black/90
+                      via-black/55
+                      to-black/15
+                    "
+                  />
 
-                {/* Content */}
-                <div className="relative z-10 h-full min-h-[480px] lg:min-h-[520px] p-8 sm:p-10 lg:p-12 flex flex-col justify-between">
-                  {/* Top */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div
+                  {/* Content */}
+                  <div
+                    className="
+                      relative
+                      z-10
+                      h-full
+                      min-h-[480px]
+                      lg:min-h-[520px]
+                      p-8
+                      sm:p-10
+                      lg:p-12
+                      flex
+                      flex-col
+                      justify-between
+                    "
+                  >
+                    {/* Top */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <motion.div
+                          className="
+                            w-12
+                            h-12
+                            rounded-xl
+                            border
+                            border-[#FF9800]
+                            flex
+                            items-center
+                            justify-center
+                            text-[#FF9800]
+                          "
+                          whileHover={{
+                            rotate: -5,
+                            scale: 1.08,
+                          }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                          }}
+                        >
+                          <Camera size={24} />
+                        </motion.div>
+
+                        <div>
+                          <p className="text-xs tracking-[0.2em] text-white/50">
+                            GEN MEDIA
+                          </p>
+
+                          <p className="text-sm tracking-[0.15em] font-medium">
+                            AGENCY
+                          </p>
+                        </div>
+                      </div>
+
+                      <motion.div
                         className="
-                          w-12
-                          h-12
-                          rounded-xl
+                          w-10
+                          h-10
+                          rounded-full
                           border
-                          border-[#FF9800]
+                          border-white/30
                           flex
                           items-center
                           justify-center
-                          text-[#FF9800]
-                        "
-                      >
-                        <Camera size={24} />
-                      </div>
-
-                      <div>
-                        <p className="text-xs tracking-[0.2em] text-white/50">
-                          GEN MEDIA
-                        </p>
-
-                        <p className="text-sm tracking-[0.15em] font-medium">
-                          AGENCY
-                        </p>
-                      </div>
-                    </div>
-
-                    <div
-                      className="
-                        w-10
-                        h-10
-                        rounded-full
-                        border
-                        border-white/30
-                        flex
-                        items-center
-                        justify-center
-                        group-hover:bg-[#FF9800]
-                        group-hover:border-[#FF9800]
-                        group-hover:text-[#2C2C2C]
-                        transition-all
-                      "
-                    >
-                      <MoveUpRight size={19} />
-                    </div>
-                  </div>
-
-                  {/* Bottom */}
-                  <div>
-                    <p className="text-xs tracking-[0.25em] text-[#FF9800] mb-5">
-                      DESIGN • MEDIA • PRODUCTION
-                    </p>
-
-                    <h2
-                      className="
-                        text-4xl
-                        sm:text-5xl
-                        font-semibold
-                        leading-[0.95]
-                        max-w-lg
-                      "
-                    >
-                      We create
-                      <br />
-                      <span className="text-[#FF9800]">for brands.</span>
-                    </h2>
-
-                    <p
-                      className="
-                        mt-6
-                        max-w-lg
-                        text-sm
-                        sm:text-base
-                        leading-relaxed
-                        text-white/65
-                      "
-                    >
-                      From branding and graphic design to video production and
-                      photography, we help businesses tell their story through
-                      powerful visuals.
-                    </p>
-
-                    {/* Services */}
-                    <div className="flex flex-wrap gap-x-4 gap-y-3 mt-7">
-                      <span className="flex items-center gap-2 text-xs text-white/80">
-                        <Palette size={16} className="text-[#FF9800]" />
-                        Branding
-                      </span>
-
-                      <span className="w-px h-4 bg-white/20" />
-
-                      <span className="flex items-center gap-2 text-xs text-white/80">
-                        <Palette size={16} className="text-[#FF9800]" />
-                        Graphic Design
-                      </span>
-
-                      <span className="w-px h-4 bg-white/20" />
-
-                      <span className="flex items-center gap-2 text-xs text-white/80">
-                        <Video size={16} className="text-[#FF9800]" />
-                        Video
-                      </span>
-
-                      <span className="w-px h-4 bg-white/20" />
-
-                      <span className="flex items-center gap-2 text-xs text-white/80">
-                        <Camera size={16} className="text-[#FF9800]" />
-                        Photography
-                      </span>
-                    </div>
-
-                    {/* CTA */}
-                    <div className="mt-8">
-                      <span
-                        className="
-                          inline-flex
-                          items-center
-                          gap-3
-                          border
-                          border-[#FF9800]
-                          text-white
-                          px-6
-                          py-3.5
-                          rounded-full
-                          text-sm
-                          font-medium
                           group-hover:bg-[#FF9800]
+                          group-hover:border-[#FF9800]
                           group-hover:text-[#2C2C2C]
-                          group-hover:gap-5
                           transition-all
                         "
+                        whileHover={{
+                          rotate: 45,
+                          scale: 1.1,
+                        }}
                       >
-                        VIEW OUR WORK
-                        <ArrowRight size={17} />
-                      </span>
+                        <MoveUpRight size={19} />
+                      </motion.div>
                     </div>
+
+                    {/* Bottom */}
+                    <motion.div
+                      initial={{
+                        opacity: 0.85,
+                        y: 10,
+                      }}
+                      whileInView={{
+                        opacity: 1,
+                        y: 0,
+                      }}
+                      viewport={{
+                        once: true,
+                      }}
+                      transition={{
+                        duration: 0.6,
+                        delay: 0.2,
+                      }}
+                    >
+                      <p className="text-xs tracking-[0.25em] text-[#FF9800] mb-5">
+                        DESIGN • MEDIA • PRODUCTION
+                      </p>
+
+                      <h2
+                        className="
+                          text-4xl
+                          sm:text-5xl
+                          font-semibold
+                          leading-[0.95]
+                          max-w-lg
+                        "
+                      >
+                        We create
+                        <br />
+                        <span className="text-[#FF9800]">for brands.</span>
+                      </h2>
+
+                      <p
+                        className="
+                          mt-6
+                          max-w-lg
+                          text-sm
+                          sm:text-base
+                          leading-relaxed
+                          text-white/65
+                        "
+                      >
+                        From branding and graphic design to video production and
+                        photography, we help businesses tell their story through
+                        powerful visuals.
+                      </p>
+
+                      {/* Services */}
+                      <div className="flex flex-wrap gap-x-4 gap-y-3 mt-7">
+                        <span className="flex items-center gap-2 text-xs text-white/80">
+                          <Palette size={16} className="text-[#FF9800]" />
+                          Branding
+                        </span>
+
+                        <span className="w-px h-4 bg-white/20" />
+
+                        <span className="flex items-center gap-2 text-xs text-white/80">
+                          <Palette size={16} className="text-[#FF9800]" />
+                          Graphic Design
+                        </span>
+
+                        <span className="w-px h-4 bg-white/20" />
+
+                        <span className="flex items-center gap-2 text-xs text-white/80">
+                          <Video size={16} className="text-[#FF9800]" />
+                          Video
+                        </span>
+
+                        <span className="w-px h-4 bg-white/20" />
+
+                        <span className="flex items-center gap-2 text-xs text-white/80">
+                          <Camera size={16} className="text-[#FF9800]" />
+                          Photography
+                        </span>
+                      </div>
+
+                      {/* CTA */}
+                      <div className="mt-8">
+                        <motion.span
+                          className="
+                            inline-flex
+                            items-center
+                            gap-3
+                            border
+                            border-[#FF9800]
+                            text-white
+                            px-6
+                            py-3.5
+                            rounded-full
+                            text-sm
+                            font-medium
+                          "
+                          whileHover={{
+                            backgroundColor: "#FF9800",
+                            color: "#2C2C2C",
+                            gap: "1.25rem",
+                            scale: 1.03,
+                          }}
+                          transition={{
+                            duration: 0.25,
+                          }}
+                        >
+                          VIEW OUR WORK
+                          <ArrowRight size={17} />
+                        </motion.span>
+                      </div>
+                    </motion.div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -793,8 +1589,9 @@ function Home() {
         {/* =================================================
             SMALL BOTTOM STATEMENT
         ================================================== */}
+
         <section className="px-6 sm:px-10 lg:px-16 xl:px-24 pb-20">
-          <div
+          <motion.div
             className="
               max-w-7xl
               mx-auto
@@ -810,11 +1607,27 @@ function Home() {
               tracking-[0.15em]
               text-[#2C2C2C]/45
             "
+            initial={{
+              opacity: 0,
+              y: 30,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.5,
+            }}
+            transition={{
+              duration: 0.8,
+              ease: [0.22, 1, 0.36, 1],
+            }}
           >
             <span>CREATIVE MEDIA & DESIGN</span>
 
             <span>NEPAL · 2026</span>
-          </div>
+          </motion.div>
         </section>
       </div>
     </main>
