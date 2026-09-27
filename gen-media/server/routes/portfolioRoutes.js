@@ -18,10 +18,10 @@ const router = express.Router();
 router.get("/", getPortfolio);
 
 router.get("/featured", getFeaturedPortfolio);
+router.get("/search", searchPortfolios);
 
 router.get("/category/:category", getPortfolioByCategory);
 router.get("/category/:category/:subcategory", getPortfolioBySubcategory);
-router.get("/search", searchPortfolios);
 router.get("/:id", getSinglePortfolio);
 
 router.post("/create-portfolio", authMiddleware, createPortfolio);
