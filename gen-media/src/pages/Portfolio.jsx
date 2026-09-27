@@ -69,7 +69,7 @@ function Portfolio() {
         console.log("portfolio data:", data);
 
         // Only show the first 3 featured projects
-        setProjects(Array.isArray(data) ? data.slice(0, 3) : []);
+        setProjects(Array.isArray(data) ? data: []);
       } catch (error) {
         console.error("Portfolio fetch error:", error);
         setError("Unable to load portfolio.");
@@ -153,7 +153,7 @@ function Portfolio() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
           <div>
             <p className="text-xs sm:text-sm tracking-[0.3em] text-[#FF9800] py-6">
-              FEATURED WORK
+              All WORK
             </p>
 
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[0.9] tracking-tight">
