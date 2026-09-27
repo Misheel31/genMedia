@@ -14,18 +14,19 @@ import AdminLogin from "./pages/Admin/AdminLogin";
 import AdminPortfolio from "./pages/Admin/AdminPortfolio";
 import AdminRoute from "./pages/Admin/AdminRoute";
 import Contact from "./pages/Contact";
+import FeaturedPortfolio from "./pages/FeaturedPortfolio";
 import Portfolio from "./pages/Portfolio";
 import PortfolioDetail from "./pages/PortfolioDetail";
+import SearchResults from "./pages/SearchResults";
 import Services from "./pages/Services";
 import Team from "./pages/Team";
-import SearchResults from "./pages/SearchResults";
 
 function Home() {
   return (
     <>
       <Hero />
-      <Academy />
-      <Portfolio />
+      {/* <Academy /> */}
+      <FeaturedPortfolio />
     </>
   );
 }
