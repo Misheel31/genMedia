@@ -69,7 +69,7 @@ function Portfolio() {
         console.log("portfolio data:", data);
 
         // Only show the first 3 featured projects
-        setProjects(Array.isArray(data) ? data: []);
+        setProjects(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error("Portfolio fetch error:", error);
         setError("Unable to load portfolio.");
@@ -281,18 +281,22 @@ function Portfolio() {
                   {project.video ? (
                     <video
                       src={project.video}
+                      controls
                       muted
                       playsInline
-                      loop
-                      preload="metadata"
-                      className="
-                        w-full
-                          h-[500px]
-                          object-cover
-                          transition-transform
-                          duration-700
-                          group-hover:scale-105
-                        "
+                      preload="auto"
+                      className="w-full h-[500px] object-cover"
+                      onLoadedMetadata={(e) => {
+                        console.log("Video loaded:", project.video);
+                        console.log("Duration:", e.currentTarget.duration);
+                      }}
+                      onError={(e) => {
+                        console.error(
+                          "Video error:",
+                          project.video,
+                          e.currentTarget.error,
+                        );
+                      }}
                     />
                   ) : project.image ? (
                     <img
