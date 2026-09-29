@@ -3,5 +3,4 @@ gen-media/public/portfolio/branding/manangValleyCatalogue.pdf -filter -diff -mer
 
 gen-media/public/teams/*.jpg -filter -diff -merge
 gen-media/public/teams/*.jpeg -filter -diff -merge
-public/videos/*.mp4 filter=lfs diff=lfs merge=lfs -text
 gen-media/public/videos/*.mp4 filter=lfs diff=lfs merge=lfs -text
