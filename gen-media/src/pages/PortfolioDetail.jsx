@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import VideoPlayer from "../VideoPlayer.jsx";
 
 function PortfolioDetail() {
   const { id } = useParams();
@@ -8,7 +9,7 @@ function PortfolioDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const videoRef = useRef(null);
+  // const videoRef = useRef(null);
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   useEffect(() => {
@@ -41,41 +42,41 @@ function PortfolioDetail() {
     fetchProject();
   }, [id]);
 
-  useEffect(() => {
-    const video = videoRef.current;
+  // useEffect(() => {
+  //   const video = videoRef.current;
 
-    if (!video) return;
+  //   if (!video) return;
 
-    const checkVideo = () => {
-      console.log("===== VIDEO TEST =====");
-      console.log("duration:", video.duration);
-      console.log("readyState:", video.readyState);
-      console.log("networkState:", video.networkState);
-      console.log("error:", video.error);
-    };
+  //   const checkVideo = () => {
+  //     console.log("===== VIDEO TEST =====");
+  //     console.log("duration:", video.duration);
+  //     console.log("readyState:", video.readyState);
+  //     console.log("networkState:", video.networkState);
+  //     console.log("error:", video.error);
+  //   };
 
-    const handleLoadedMetadata = () => {
-      console.log("===== VIDEO METADATA LOADED =====");
-      checkVideo();
-    };
+  //   const handleLoadedMetadata = () => {
+  //     console.log("===== VIDEO METADATA LOADED =====");
+  //     checkVideo();
+  //   };
 
-    const handleError = () => {
-      console.log("===== VIDEO ERROR =====");
-      checkVideo();
-    };
+  //   const handleError = () => {
+  //     console.log("===== VIDEO ERROR =====");
+  //     checkVideo();
+  //   };
 
-    video.addEventListener("loadedmetadata", handleLoadedMetadata);
-    video.addEventListener("error", handleError);
+  //   video.addEventListener("loadedmetadata", handleLoadedMetadata);
+  //   video.addEventListener("error", handleError);
 
-    // Check immediately as well
-    checkVideo();
+  //   // Check immediately as well
+  //   checkVideo();
 
-    return () => {
-      video.removeEventListener("loadedmetadata", handleLoadedMetadata);
+  //   return () => {
+  //     video.removeEventListener("loadedmetadata", handleLoadedMetadata);
 
-      video.removeEventListener("error", handleError);
-    };
-  }, [project]);
+  //     video.removeEventListener("error", handleError);
+  //   };
+  // }, [project]);
 
   if (loading) {
     return (
@@ -196,27 +197,18 @@ function PortfolioDetail() {
           {project.video ? (
             <div
               className="
-                relative
-                w-full
-                bg-black
-                rounded-sm
-                overflow-hidden
-              "
+              relative
+              w-full
+              bg-black
+              rounded-sm
+              overflow-hidden
+            "
             >
-              <video
-                ref={videoRef}
+              <VideoPlayer
                 src={project.video}
-                controls
-                playsInline
-                preload="metadata"
-                className="
-                  block
-                  w-full
-                  h-auto
-                  max-h-[70vh]
-                  object-contain
-                  mx-auto
-                "
+                poster={project.videoThumbnail}
+                title={project.title}
+                className="max-h-[70vh]"
               />
             </div>
           ) : project.image ? (
