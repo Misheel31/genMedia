@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import VideoPlayer from "../VideoPlayer.jsx";
+import VideoPlayer from "./VideoPlayer.jsx";
 
 function PortfolioDetail() {
   const { id } = useParams();
@@ -10,6 +10,7 @@ function PortfolioDetail() {
   const [error, setError] = useState("");
 
   // const videoRef = useRef(null);
+  
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   useEffect(() => {
