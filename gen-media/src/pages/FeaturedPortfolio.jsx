@@ -116,23 +116,41 @@ function FeaturedPortfolio() {
                 }}
               >
                 <Link to={`/portfolio/${project._id}`} className="group block">
-                  {/* MEDIA - ORIGINAL CODE PRESERVED */}
+                  {/* MEDIA */}
                   <div className="relative overflow-hidden bg-[#F4F2ED] rounded-sm h-[500px]">
                     {project.video ? (
-                      <video
-                        src={project.video}
-                        muted
-                        playsInline
-                        loop
-                        autoPlay
-                        preload="metadata"
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
+                      <div className="relative w-full h-full bg-black flex items-center justify-center">
+                        {project.videoThumbnail ? (
+                          <img
+                            src={project.videoThumbnail}
+                            alt={project.title}
+                            className="
+                            w-full
+                            h-full
+                            object-contain
+                            transition-transform
+                            duration-700
+                            group-hover:scale-105
+                          "
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <span className="text-sm text-white/50">Video</span>
+                          </div>
+                        )}
+                      </div>
                     ) : project.image ? (
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="
+                        w-full
+                        h-full
+                        object-cover
+                        transition-transform
+                        duration-700
+                        group-hover:scale-105
+                      "
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
