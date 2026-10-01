@@ -776,12 +776,12 @@ function Portfolio() {
                   {project.video ? (
                     <div
                       className="
-      relative
-      w-full
-      bg-black
-      rounded-sm
-      overflow-hidden
-    "
+                      relative
+                      w-full
+                      bg-black
+                      rounded-sm
+                      overflow-hidden
+                    "
                     >
                       <VideoPlayer
                         src={project.video}
@@ -921,7 +921,7 @@ function Portfolio() {
                     </div>
 
                     {/* Arrow */}
-                    <span
+                    {/* <span
                       className="
                           text-xl
                           text-[#2C2C2C]/30
@@ -932,8 +932,8 @@ function Portfolio() {
                           group-hover:-translate-y-1
                         "
                     >
-                      →
-                    </span>
+                      
+                    </span> */}
                   </div>
 
                   {/* DESCRIPTION */}
