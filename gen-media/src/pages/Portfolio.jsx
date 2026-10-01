@@ -795,9 +795,7 @@ function Portfolio() {
                       className="
                       relative
                       w-full
-                      h-[55vh]
-                      min-h-[350px]
-                      max-h-[650px]
+                  
                       overflow-hidden
                       rounded-sm
                       bg-[#F4F2ED]

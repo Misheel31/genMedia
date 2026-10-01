@@ -141,8 +141,6 @@ function FeaturedPortfolio() {
                         className="
                           relative
                           w-full
-                          h-[500px]
-                          overflow-hidden
                           rounded-sm
                           bg-[#F4F2ED]
                           flex
@@ -158,7 +156,7 @@ function FeaturedPortfolio() {
                           className="
                           w-full
                           h-full
-                          object-contain
+                          object-cover
                           transition-transform
                           duration-700
                           group-hover:scale-105

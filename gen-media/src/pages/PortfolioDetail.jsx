@@ -201,7 +201,7 @@ function PortfolioDetail() {
                 w-full
                 bg-black
                 rounded-sm
-
+                overflow-hidden
               "
             >
               <VideoPlayer
@@ -216,11 +216,15 @@ function PortfolioDetail() {
               className="
                 relative
                 w-full
+                h-[55vh]
+                min-h-[350px]
+                max-h-[650px]
                 overflow-hidden
                 rounded-sm
+                bg-[#F4F2ED]
                 flex
-                items-center  
-                justify-center              
+                items-center
+                justify-center
               "
             >
               {/* FULL IMAGE */}
@@ -230,9 +234,8 @@ function PortfolioDetail() {
                 alt={project.title}
                 className="
                   w-full
-                  h-auto
-                  object-cover
-                  block
+                  h-full
+                  object-contain
                 "
               />
 
