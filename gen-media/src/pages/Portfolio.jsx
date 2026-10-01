@@ -787,31 +787,35 @@ function Portfolio() {
                         src={project.video}
                         poster={project.videoThumbnail}
                         title={project.title}
-                        className="max-h-[500px]"
+                        className="max-h-[70vh]"
                       />
                     </div>
                   ) : project.image ? (
                     <div
                       className="
-                          relative
-                          w-full
-                          h-[500px]
-                          overflow-hidden
-                          rounded-sm
-                          bg-[#F4F2ED]
-                          flex
-                          items-center
-                          justify-center
-                        "
+                      relative
+                      w-full
+                      h-[55vh]
+                      min-h-[350px]
+                      max-h-[650px]
+                      overflow-hidden
+                      rounded-sm
+                      bg-[#F4F2ED]
+                      flex
+                      items-center
+                      justify-center
+                    "
                     >
+                      {/* FULL IMAGE */}
+
                       <img
                         src={project.image}
                         alt={project.title}
                         className="
-                            w-full
-                            h-full
-                            object-contain
-                          "
+                          w-full
+                          h-full
+                          object-contain
+                        "
                       />
                     </div>
                   ) : (
