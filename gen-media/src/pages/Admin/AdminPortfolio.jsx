@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import VideoPlayer from "../VideoPlayer.jsx";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -11,6 +12,7 @@ const emptyForm = {
   image: "",
   pdf: "",
   video: "",
+  videoSource: "path",
   videoThumbnail: "",
   client: "",
   year: "",
@@ -83,6 +85,34 @@ function AdminPortfolio() {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleVideoSourceChange = (source) => {
+    setForm((prev) => ({
+      ...prev,
+      videoSource: source,
+      video: "",
+    }));
+  };
+
+  const getVideoSource = (video = "") => {
+    const value = video.trim().toLowerCase();
+
+    if (
+      value.includes("youtube.com/watch") ||
+      value.includes("youtube.com/shorts/") ||
+      value.includes("youtu.be/")
+    ) {
+      return "youtube";
+    }
+
+    if (value.includes("vimeo.com/")) {
+      return "vimeo";
+    }
+
+    return value.startsWith("http://") || value.startsWith("https://")
+      ? "url"
+      : "path";
   };
 
   const handleCheckboxChange = (e) => {
@@ -251,6 +281,7 @@ function AdminPortfolio() {
       image: project.image || "",
       pdf: project.pdf || "",
       video: project.video || "",
+      videoSource: getVideoSource(project.video || ""),
       videoThumbnail: project.videoThumbnail || "",
       client: project.client || "",
       year: project.year || "",
@@ -544,18 +575,150 @@ function AdminPortfolio() {
                 {/* VIDEO */}
 
                 <div>
-                  <label className="mb-2 block text-sm font-semibold">
-                    Video URL / Path
+                  <label className="mb-3 block text-sm font-semibold">
+                    Video
                   </label>
 
-                  <input
-                    type="text"
-                    name="video"
-                    value={form.video}
-                    onChange={handleInputChange}
-                    placeholder="/portfolio/video-editing/project.mp4"
-                    className="w-full rounded-xl border border-[#2C2C2C]/15 px-4 py-3 outline-none focus:border-[#FF9800]"
-                  />
+                  {/* VIDEO SOURCE */}
+                  <div className="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                    {[
+                      {
+                        value: "path",
+                        title: "Website Video",
+                        description:
+                          "Use a video path hosted with your website.",
+                      },
+                      {
+                        value: "youtube",
+                        title: "YouTube",
+                        description: "Use a YouTube video or Short link.",
+                      },
+                      {
+                        value: "vimeo",
+                        title: "Vimeo",
+                        description: "Use a Vimeo video link.",
+                      },
+                      {
+                        value: "url",
+                        title: "External URL",
+                        description:
+                          "Use a direct MP4 or browser-playable URL.",
+                      },
+                    ].map((option) => (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => handleVideoSourceChange(option.value)}
+                        className={`rounded-xl border p-4 text-left transition ${
+                          form.videoSource === option.value
+                            ? "border-[#FF9800] bg-[#FF9800]/10"
+                            : "border-[#2C2C2C]/10 hover:border-[#FF9800]/50"
+                        }`}
+                      >
+                        <p className="text-sm font-bold">{option.title}</p>
+                        <p className="mt-1 text-xs leading-5 text-gray-500">
+                          {option.description}
+                        </p>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* VIDEO INPUT */}
+                  {form.videoSource === "path" && (
+                    <div>
+                      <label className="mb-2 block text-xs font-semibold text-gray-600">
+                        Website Video Path
+                      </label>
+
+                      <input
+                        type="text"
+                        name="video"
+                        value={form.video}
+                        onChange={handleInputChange}
+                        placeholder="/videos/project.mp4"
+                        className="w-full rounded-xl border border-[#2C2C2C]/15 px-4 py-3 outline-none transition focus:border-[#FF9800]"
+                      />
+
+                      <p className="mt-2 text-xs text-gray-500">
+                        Example: /videos/US_KOL_V2.mp4
+                      </p>
+                    </div>
+                  )}
+
+                  {form.videoSource === "youtube" && (
+                    <div>
+                      <label className="mb-2 block text-xs font-semibold text-gray-600">
+                        YouTube URL
+                      </label>
+
+                      <input
+                        type="url"
+                        name="video"
+                        value={form.video}
+                        onChange={handleInputChange}
+                        placeholder="https://www.youtube.com/watch?v=VIDEO_ID"
+                        className="w-full rounded-xl border border-[#2C2C2C]/15 px-4 py-3 outline-none transition focus:border-[#FF9800]"
+                      />
+
+                      <p className="mt-2 text-xs text-gray-500">
+                        Supports youtube.com/watch, youtu.be, and YouTube Shorts
+                        links.
+                      </p>
+                    </div>
+                  )}
+
+                  {form.videoSource === "vimeo" && (
+                    <div>
+                      <label className="mb-2 block text-xs font-semibold text-gray-600">
+                        Vimeo URL
+                      </label>
+
+                      <input
+                        type="url"
+                        name="video"
+                        value={form.video}
+                        onChange={handleInputChange}
+                        placeholder="https://vimeo.com/123456789"
+                        className="w-full rounded-xl border border-[#2C2C2C]/15 px-4 py-3 outline-none transition focus:border-[#FF9800]"
+                      />
+
+                      <p className="mt-2 text-xs text-gray-500">
+                        Enter the normal Vimeo video URL.
+                      </p>
+                    </div>
+                  )}
+
+                  {form.videoSource === "url" && (
+                    <div>
+                      <label className="mb-2 block text-xs font-semibold text-gray-600">
+                        External Video URL
+                      </label>
+
+                      <input
+                        type="url"
+                        name="video"
+                        value={form.video}
+                        onChange={handleInputChange}
+                        placeholder="https://example.com/project.mp4"
+                        className="w-full rounded-xl border border-[#2C2C2C]/15 px-4 py-3 outline-none transition focus:border-[#FF9800]"
+                      />
+
+                      <p className="mt-2 text-xs text-gray-500">
+                        Use a direct MP4 or another browser-playable video URL.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* ADMIN VIDEO PREVIEW */}
+                  {form.video && (
+                    <div className="mt-4">
+                      <p className="mb-2 text-xs font-semibold text-gray-600">
+                        Video Preview
+                      </p>
+
+                      <VideoPlayer src={form.video} className="max-h-96" />
+                    </div>
+                  )}
                 </div>
 
                 {/* VIDEO THUMBNAIL */}
@@ -736,10 +899,9 @@ function AdminPortfolio() {
                     </div>
                   ) : project.video ? (
                     <div className="aspect-video overflow-hidden bg-black">
-                      <video
+                      <VideoPlayer
                         src={project.video}
-                        controls
-                        className="h-full w-full object-contain"
+                        className="h-full w-full"
                       />
                     </div>
                   ) : (
