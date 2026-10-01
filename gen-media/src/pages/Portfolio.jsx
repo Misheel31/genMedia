@@ -774,12 +774,20 @@ function Portfolio() {
                 {/* MEDIA */}
                 <div className="relative overflow-hidden bg-[#F4F2ED] rounded-sm">
                   {project.video ? (
-                    <div className="relative w-full h-[500px] bg-black overflow-hidden">
+                    <div
+                      className="
+      relative
+      w-full
+      bg-black
+      rounded-sm
+      overflow-hidden
+    "
+                    >
                       <VideoPlayer
                         src={project.video}
                         poster={project.videoThumbnail}
                         title={project.title}
-                        className="w-full h-full"
+                        className="max-h-[500px]"
                       />
                     </div>
                   ) : project.image ? (
