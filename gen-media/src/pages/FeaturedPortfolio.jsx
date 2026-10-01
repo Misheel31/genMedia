@@ -122,7 +122,7 @@ function FeaturedPortfolio() {
                       <div className="relative w-full h-full bg-black flex items-center justify-center">
                         {project.videoThumbnail ? (
                           <img
-                            src={project.videoThumbnail}
+                            poster={project.videoThumbnail}
                             alt={project.title}
                             className="
                             w-full
