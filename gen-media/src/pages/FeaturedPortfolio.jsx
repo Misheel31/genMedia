@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import VideoPlayer from "./VideoPlayer.jsx";
 
 function FeaturedPortfolio() {
   const [projects, setProjects] = useState([]);
@@ -117,43 +118,55 @@ function FeaturedPortfolio() {
               >
                 <Link to={`/portfolio/${project._id}`} className="group block">
                   {/* MEDIA */}
-                  <div className="relative overflow-hidden bg-[#F4F2ED] rounded-sm h-[500px]">
+                  <div className="relative overflow-hidden bg-[#F4F2ED] rounded-sm">
                     {project.video ? (
-                      <div className="relative w-full h-full bg-black flex items-center justify-center">
-                        {project.videoThumbnail ? (
-                          <img
-                            poster={project.videoThumbnail}
-                            alt={project.title}
-                            className="
-                            w-full
-                            h-full
-                            object-contain
-                            transition-transform
-                            duration-700
-                            group-hover:scale-105
-                          "
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center">
-                            <span className="text-sm text-white/50">Video</span>
-                          </div>
-                        )}
+                      <div
+                        className="
+                        relative
+                        w-full
+                        bg-black
+                        rounded-sm
+                        overflow-hidden
+                      "
+                      >
+                        <VideoPlayer
+                          src={project.video}
+                          poster={project.videoThumbnail}
+                          title={project.title}
+                          className="max-h-[70vh]"
+                        />
                       </div>
                     ) : project.image ? (
-                      <img
-                        src={project.image}
-                        alt={project.title}
+                      <div
                         className="
-                        w-full
-                        h-full
-                        object-cover
-                        transition-transform
-                        duration-700
-                        group-hover:scale-105
-                      "
-                      />
+                          relative
+                          w-full
+                          h-[500px]
+                          overflow-hidden
+                          rounded-sm
+                          bg-[#F4F2ED]
+                          flex
+                          items-center
+                          justify-center
+                        "
+                      >
+                        {/* FULL IMAGE */}
+
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="
+                          w-full
+                          h-full
+                          object-contain
+                          transition-transform
+                          duration-700
+                          group-hover:scale-105
+                        "
+                        />
+                      </div>
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-full h-[500px] flex items-center justify-center">
                         No media available
                       </div>
                     )}
