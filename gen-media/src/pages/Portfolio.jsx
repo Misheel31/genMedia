@@ -500,7 +500,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import VideoPlayer from "./VideoPlayer.jsx";
 
 const categories = [
   {
@@ -776,19 +775,62 @@ function Portfolio() {
                   {project.video ? (
                     <div
                       className="
-                      relative
-                      w-full
-                      bg-black
-                      rounded-sm
-                      overflow-hidden
-                    "
+                        relative
+                        w-full
+                        h-[500px]
+                        overflow-hidden
+                        rounded-sm
+                        bg-black
+                      "
                     >
-                      <VideoPlayer
-                        src={project.video}
-                        poster={project.videoThumbnail}
-                        title={project.title}
-                        className="max-h-[70vh]"
-                      />
+                      {project.videoThumbnail ? (
+                        <img
+                          src={project.videoThumbnail}
+                          alt={project.title}
+                          className="
+                              w-full
+                              h-full
+                              object-contain
+                              transition-transform
+                              duration-700
+                              group-hover:scale-105
+                            "
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <span className="text-sm text-white/50">Video</span>
+                        </div>
+                      )}
+
+                      {/* PLAY ICON */}
+                      <div
+                        className="
+                        absolute
+                        inset-0
+                        flex
+                        items-center
+                        justify-center
+                        pointer-events-none
+                      "
+                      >
+                        <div
+                          className="
+                          w-16
+                          h-16
+                          rounded-full
+                          bg-white/90
+                          flex
+                          items-center
+                          justify-center
+                          shadow-lg
+                          transition-transform
+                          duration-300
+                          group-hover:scale-110
+                        "
+                        >
+                          <span className="ml-1 text-xl text-[#2C2C2C]">▶</span>
+                        </div>
+                      </div>
                     </div>
                   ) : project.image ? (
                     <div
