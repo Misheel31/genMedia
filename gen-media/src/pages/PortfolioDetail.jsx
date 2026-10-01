@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import VideoPlayer from "../VideoPlayer.jsx";
+import VideoPlayer from "./VideoPlayer.jsx";
 
 function PortfolioDetail() {
   const { id } = useParams();
