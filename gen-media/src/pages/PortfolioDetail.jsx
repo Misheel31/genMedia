@@ -208,7 +208,7 @@ function PortfolioDetail() {
                 src={project.video}
                 poster={project.videoThumbnail}
                 title={project.title}
-                className="max-h-[70vh]"
+                className="max-h-full"
               />
             </div>
           ) : project.image ? (

@@ -528,6 +528,7 @@ const subcategories = {
     "Brand Identity",
     "Packaging Design",
     "Social Media Design",
+    "Advertising Design",
   ],
   video: [
     "All",
@@ -587,9 +588,20 @@ function Portfolio() {
     setSelectedSubcategory("All");
   };
 
+  const normalizeValue = (value) => {
+    if (typeof value !== "string") return "";
+
+    return value
+      .trim()
+      .toLowerCase()
+      .replace(/[-_]+/g, " ")
+      .replace(/\s+/g, " ");
+  };
+
   const filteredProjects = useMemo(() => {
     let filtered = [...projects];
 
+    // CATEGORY FILTER
     if (selectedCategory !== "all") {
       filtered = filtered.filter((project) => {
         const projectCategories = Array.isArray(project.category)
@@ -598,14 +610,24 @@ function Portfolio() {
             ? [project.category]
             : [];
 
-        return projectCategories.some(
-          (category) =>
-            typeof category === "string" &&
-            category.toLowerCase() === selectedCategory.toLowerCase(),
-        );
+        return projectCategories.some((category) => {
+          const normalizedCategory = normalizeValue(category);
+
+          // Support the different names used in Admin and Public filters
+          if (selectedCategory === "video") {
+            return (
+              normalizedCategory === "video" ||
+              normalizedCategory === "video editing" ||
+              normalizedCategory === "motion graphics"
+            );
+          }
+
+          return normalizedCategory === normalizeValue(selectedCategory);
+        });
       });
     }
 
+    // SUBCATEGORY FILTER
     if (selectedCategory !== "all" && selectedSubcategory !== "All") {
       filtered = filtered.filter((project) => {
         const projectSubcategories = Array.isArray(project.subcategory)
@@ -616,8 +638,7 @@ function Portfolio() {
 
         return projectSubcategories.some(
           (subcategory) =>
-            typeof subcategory === "string" &&
-            subcategory.toLowerCase() === selectedSubcategory.toLowerCase(),
+            normalizeValue(subcategory) === normalizeValue(selectedSubcategory),
         );
       });
     }
@@ -778,6 +799,7 @@ function Portfolio() {
                       className="
                     relative
                     w-full
+                    h-full
                     bg-black
                     rounded-sm
                     overflow-hidden
@@ -787,7 +809,7 @@ function Portfolio() {
                         src={project.video}
                         poster={project.videoThumbnail}
                         title={project.title}
-                        className="max-h-[70vh]"
+                        className="max-h-full"
                       />
                     </div>
                   ) : project.image ? (
