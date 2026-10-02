@@ -118,54 +118,55 @@ function FeaturedPortfolio() {
               >
                 <Link to={`/portfolio/${project._id}`} className="group block">
                   {/* MEDIA */}
-                  <div className="relative overflow-hidden bg-[#F4F2ED] rounded-sm">
+                  {/* MEDIA */}
+                  <div className="relative overflow-hidden bg-[#F4F2ED] rounded-sm h-[500px]">
                     {project.video ? (
                       <div
                         className="
-                        relative
-                        w-full
-                        bg-black
-                        rounded-sm
-                        overflow-hidden
-                      "
+        relative
+        w-full
+        h-full
+        bg-black
+        rounded-sm
+        overflow-hidden
+      "
                       >
                         <VideoPlayer
                           src={project.video}
                           poster={project.videoThumbnail}
                           title={project.title}
-                          className="max-h-[70vh]"
+                          className="w-full h-full object-cover"
                         />
                       </div>
                     ) : project.image ? (
                       <div
                         className="
-                          relative
-                          w-full
-                          rounded-sm
-                          bg-[#F4F2ED]
-                          flex
-                          items-center
-                          justify-center
-                        "
+        relative
+        w-full
+        h-full
+        rounded-sm
+        bg-[#F4F2ED]
+        overflow-hidden
+      "
                       >
-                        {/* FULL IMAGE */}
-
                         <img
                           src={project.image}
                           alt={project.title}
                           className="
-                          w-full
-                          h-full
-                          object-cover
-                          transition-transform
-                          duration-700
-                          group-hover:scale-105
-                        "
+          w-full
+          h-full
+          object-cover
+          transition-transform
+          duration-700
+          group-hover:scale-105
+        "
                         />
                       </div>
                     ) : (
-                      <div className="w-full h-[500px] flex items-center justify-center">
-                        No media available
+                      <div className="w-full h-full flex items-center justify-center">
+                        <span className="text-sm text-[#2C2C2C]/40">
+                          No media available
+                        </span>
                       </div>
                     )}
 
