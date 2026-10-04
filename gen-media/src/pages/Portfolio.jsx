@@ -797,13 +797,13 @@ function Portfolio() {
                   {project.video ? (
                     <div
                       className="
-        relative
-        w-full
-        h-full
-        bg-black
-        rounded-sm
-        overflow-hidden
-      "
+                      relative
+                      w-full
+                      h-full
+                      bg-black
+                      rounded-sm
+                      overflow-hidden
+                    "
                     >
                       <VideoPlayer
                         src={project.video}
@@ -815,28 +815,28 @@ function Portfolio() {
                   ) : project.image ? (
                     <div
                       className="
-        relative
-        w-full
-        h-full
-        overflow-hidden
-        rounded-sm
-        bg-[#F4F2ED]
-        flex
-        items-center
-        justify-center
-      "
+                        relative
+                        w-full
+                        h-full
+                        overflow-hidden
+                        rounded-sm
+                        bg-[#F4F2ED]
+                        flex
+                        items-center
+                        justify-center
+                      "
                     >
                       <img
                         src={project.image}
                         alt={project.title}
                         className="
-          w-full
-          h-full
-          object-cover
-          transition-transform
-          duration-700
-          group-hover:scale-105
-        "
+                        w-full
+                        h-full
+                        object-cover
+                        transition-transform
+                        duration-700
+                        group-hover:scale-105
+                      "
                       />
                     </div>
                   ) : (
@@ -850,30 +850,30 @@ function Portfolio() {
                   {/* Orange Overlay */}
                   <div
                     className="
-      absolute
-      inset-0
-      bg-[#FF9800]/0
-      group-hover:bg-[#FF9800]/10
-      transition-all
-      duration-500
-      pointer-events-none
-    "
+                    absolute
+                    inset-0
+                    bg-[#FF9800]/0
+                    group-hover:bg-[#FF9800]/10
+                    transition-all
+                    duration-500
+                    pointer-events-none
+                  "
                   />
 
                   {/* CATEGORY */}
                   <div className="absolute top-4 left-4">
                     <span
                       className="
-        inline-block
-        bg-white
-        text-[#2C2C2C]
-        px-4
-        py-3
-        text-[10px]
-        font-medium
-        tracking-[0.18em]
-        uppercase
-      "
+                      inline-block
+                      bg-white
+                      text-[#2C2C2C]
+                      px-4
+                      py-3
+                      text-[10px]
+                      font-medium
+                      tracking-[0.18em]
+                      uppercase
+                    "
                     >
                       {Array.isArray(project.category)
                         ? project.category[0]
@@ -886,15 +886,15 @@ function Portfolio() {
                     <div className="absolute bottom-4 right-4">
                       <span
                         className="
-          bg-[#2C2C2C]/80
-          text-white
-          px-4
-          py-3
-          text-[10px]
-          tracking-[0.15em]
-          uppercase
-          backdrop-blur-sm
-        "
+                          bg-[#2C2C2C]/80
+                          text-white
+                          px-4
+                          py-3
+                          text-[10px]
+                          tracking-[0.15em]
+                          uppercase
+                          backdrop-blur-sm
+                        "
                       >
                         VIDEO
                       </span>
@@ -906,14 +906,14 @@ function Portfolio() {
                     <div className="absolute bottom-4 right-4">
                       <span
                         className="
-          bg-white
-          text-[#2C2C2C]
-          px-4
-          py-3
-          text-[10px]
-          tracking-[0.15em]
-          uppercase
-        "
+                        bg-white
+                        text-[#2C2C2C]
+                        px-4
+                        py-3
+                        text-[10px]
+                        tracking-[0.15em]
+                        uppercase
+                      "
                       >
                         CATALOGUE
                       </span>

@@ -123,13 +123,13 @@ function FeaturedPortfolio() {
                     {project.video ? (
                       <div
                         className="
-        relative
-        w-full
-        h-full
-        bg-black
-        rounded-sm
-        overflow-hidden
-      "
+                          relative
+                          w-full
+                          h-full
+                          bg-black
+                          rounded-sm
+                          overflow-hidden
+                        "
                       >
                         <VideoPlayer
                           src={project.video}
@@ -141,25 +141,25 @@ function FeaturedPortfolio() {
                     ) : project.image ? (
                       <div
                         className="
-        relative
-        w-full
-        h-full
-        rounded-sm
-        bg-[#F4F2ED]
-        overflow-hidden
-      "
+                        relative
+                        w-full
+                        h-full
+                        rounded-sm
+                        bg-[#F4F2ED]
+                        overflow-hidden
+                      "
                       >
                         <img
                           src={project.image}
                           alt={project.title}
                           className="
-          w-full
-          h-full
-          object-cover
-          transition-transform
-          duration-700
-          group-hover:scale-105
-        "
+                          w-full
+                          h-full
+                          object-cover
+                          transition-transform
+                          duration-700
+                          group-hover:scale-105
+                        "
                         />
                       </div>
                     ) : (

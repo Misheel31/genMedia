@@ -1095,7 +1095,7 @@ function Home() {
                 }}
               >
                 <Link
-                  to="/academy"
+                  to="/academy/courses"
                   className="
                     group
                     relative
