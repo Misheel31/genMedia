@@ -99,6 +99,23 @@ function AppContent() {
 }
 
 function App() {
+  useEffect(() => {
+    // Browser tab title
+    document.title = "Gen Media";
+
+    // Company favicon
+    let favicon = document.querySelector("link[rel~='icon']");
+
+    if (!favicon) {
+      favicon = document.createElement("link");
+      favicon.rel = "icon";
+      document.head.appendChild(favicon);
+    }
+
+    favicon.type = "image/png";
+    favicon.href = "/logo.png";
+  }, []);
+
   return (
     <BrowserRouter>
       <AppContent />
