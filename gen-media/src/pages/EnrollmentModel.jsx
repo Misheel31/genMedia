@@ -144,7 +144,7 @@ function EnrollmentModal({ course, onClose }) {
               </span>
 
               <span>
-                <strong>Course Fee:</strong> Rs. {course.price} per month
+                <strong>Course Fee:</strong> Rs. {course.price}
               </span>
             </div>
 
