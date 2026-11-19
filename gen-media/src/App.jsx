@@ -114,7 +114,7 @@ function App() {
     }
 
     favicon.type = "image/png";
-    favicon.href = "/logo.png";
+    favicon.href = "/02_Logo_Icon_Orange.png";
   }, []);
 
   return (
