@@ -119,7 +119,7 @@
 
 import { Search, X } from "lucide-react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -127,10 +127,24 @@ function Navbar() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const closeMenu = () => {
     setMenuOpen(false);
   };
+
+  // Detect active page
+  const isActive = (path) => location.pathname === path;
+
+  // Desktop and mobile navigation styles
+  const navClass = (path) => `
+    relative py-2 border-b-2 transition duration-300
+    ${
+      isActive(path)
+        ? "text-[#FF9800] border-[#FF9800]"
+        : "text-[#F8F6F1] border-transparent hover:text-[#FF9800] hover:border-[#FF9800]"
+    }
+  `;
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -165,52 +179,31 @@ function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6 lg:gap-8">
-            <a
-              href="/"
-              className="text-[#F8F6F1] hover:text-[#FF9800] transition duration-300"
-            >
+            <a href="/" className={navClass("/")}>
               Home
             </a>
 
-            <a
-              href="/about"
-              className="text-[#F8F6F1] hover:text-[#FF9800] transition duration-300"
-            >
+            <a href="/about" className={navClass("/about")}>
               About
             </a>
 
-            <a
-              href="/services"
-              className="text-[#F8F6F1] hover:text-[#FF9800] transition duration-300"
-            >
+            <a href="/services" className={navClass("/services")}>
               Services
             </a>
 
-            <a
-              href="/portfolio"
-              className="text-[#F8F6F1] hover:text-[#FF9800] transition duration-300"
-            >
+            <a href="/portfolio" className={navClass("/portfolio")}>
               Portfolio
             </a>
 
-            <a
-              href="/academy/courses"
-              className="text-[#F8F6F1] hover:text-[#FF9800] transition duration-300"
-            >
+            <a href="/academy/courses" className={navClass("/academy/courses")}>
               Academy
             </a>
 
-            <a
-              href="/teams"
-              className="text-[#F8F6F1] hover:text-[#FF9800] transition duration-300"
-            >
+            <a href="/teams" className={navClass("/teams")}>
               Team Members
             </a>
 
-            <a
-              href="/contact"
-              className="text-[#F8F6F1] hover:text-[#FF9800] transition duration-300"
-            >
+            <a href="/contact" className={navClass("/contact")}>
               Contact
             </a>
 
@@ -305,32 +298,24 @@ function Navbar() {
             ${menuOpen ? "flex" : "hidden"}
             flex-col
             items-center
-            gap-6
+            gap-5
             py-6
             border-t border-white/10
             mt-4
           `}
         >
-          <a
-            href="/"
-            onClick={closeMenu}
-            className="text-[#F8F6F1] hover:text-[#FF9800] transition duration-300"
-          >
+          <a href="/" onClick={closeMenu} className={navClass("/")}>
             Home
           </a>
 
-          <a
-            href="/about"
-            onClick={closeMenu}
-            className="text-[#F8F6F1] hover:text-[#FF9800] transition duration-300"
-          >
+          <a href="/about" onClick={closeMenu} className={navClass("/about")}>
             About
           </a>
 
           <a
             href="/services"
             onClick={closeMenu}
-            className="text-[#F8F6F1] hover:text-[#FF9800] transition duration-300"
+            className={navClass("/services")}
           >
             Services
           </a>
@@ -338,7 +323,7 @@ function Navbar() {
           <a
             href="/portfolio"
             onClick={closeMenu}
-            className="text-[#F8F6F1] hover:text-[#FF9800] transition duration-300"
+            className={navClass("/portfolio")}
           >
             Portfolio
           </a>
@@ -346,23 +331,19 @@ function Navbar() {
           <a
             href="/academy/courses"
             onClick={closeMenu}
-            className="text-[#F8F6F1] hover:text-[#FF9800] transition duration-300"
+            className={navClass("/academy/courses")}
           >
             Academy
           </a>
 
-          <a
-            href="/teams"
-            onClick={closeMenu}
-            className="text-[#F8F6F1] hover:text-[#FF9800] transition duration-300"
-          >
+          <a href="/teams" onClick={closeMenu} className={navClass("/teams")}>
             Team Members
           </a>
 
           <a
             href="/contact"
             onClick={closeMenu}
-            className="text-[#F8F6F1] hover:text-[#FF9800] transition duration-300"
+            className={navClass("/contact")}
           >
             Contact
           </a>
