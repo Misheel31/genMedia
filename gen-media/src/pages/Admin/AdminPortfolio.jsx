@@ -27,7 +27,7 @@ const categoryOptions = [
   "Photography",
   "Video Editing",
   "Motion Graphics",
-  "Wedding",
+  "Wedding ",
   "Digital Content",
 ];
 
