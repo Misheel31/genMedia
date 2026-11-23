@@ -503,22 +503,12 @@ import { Link } from "react-router-dom";
 import VideoPlayer from "./VideoPlayer.jsx";
 
 const categories = [
-  {
-    name: "All",
-    value: "all",
-  },
-  {
-    name: "Branding",
-    value: "branding",
-  },
-  {
-    name: "Video",
-    value: "video",
-  },
-  {
-    name: "Photography",
-    value: "photography",
-  },
+  { name: "Video", value: "video" },
+  { name: "Branding", value: "branding" },
+  { name: "Motion Graphics", value: "motion-graphics" },
+  { name: "Wedding", value: "wedding" },
+  { name: "Photography", value: "photography" },
+  { name: "All", value: "all" },
 ];
 
 const subcategories = {
@@ -550,11 +540,15 @@ function Portfolio() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("video");
   const [selectedSubcategory, setSelectedSubcategory] = useState("All");
+
+  // Fullscreen media viewer
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
+  // FETCH PORTFOLIO
   useEffect(() => {
     const fetchPortfolio = async () => {
       try {
@@ -583,11 +577,35 @@ function Portfolio() {
     fetchPortfolio();
   }, [API_URL]);
 
+  // FULLSCREEN VIEWER: ESCAPE KEY + BODY SCROLL LOCK
+  useEffect(() => {
+    if (!selectedProject) return;
+
+    const previousOverflow = document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setSelectedProject(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedProject]);
+
+  // CATEGORY CHANGE
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
     setSelectedSubcategory("All");
   };
 
+  // NORMALIZE FILTER VALUES
   const normalizeValue = (value) => {
     if (typeof value !== "string") return "";
 
@@ -598,6 +616,7 @@ function Portfolio() {
       .replace(/\s+/g, " ");
   };
 
+  // FILTER PROJECTS
   const filteredProjects = useMemo(() => {
     let filtered = [...projects];
 
@@ -613,7 +632,7 @@ function Portfolio() {
         return projectCategories.some((category) => {
           const normalizedCategory = normalizeValue(category);
 
-          // Support the different names used in Admin and Public filters
+          // Support different category names
           if (selectedCategory === "video") {
             return (
               normalizedCategory === "video" ||
@@ -649,6 +668,7 @@ function Portfolio() {
   const currentSubcategories =
     selectedCategory !== "all" ? subcategories[selectedCategory] || [] : [];
 
+  // EMPTY MESSAGE
   const getEmptyMessage = () => {
     if (selectedCategory === "all") {
       return "No featured work available.";
@@ -665,80 +685,102 @@ function Portfolio() {
     return `No ${categoryName.toLowerCase()} projects available.`;
   };
 
+  // OPEN FULLSCREEN MEDIA
+  const openMedia = (project) => {
+    setSelectedProject(project);
+  };
+
+  // CLOSE FULLSCREEN MEDIA
+  const closeMedia = () => {
+    setSelectedProject(null);
+  };
+
+  // KEYBOARD ACCESS FOR PROJECT CARDS
+  const handleCardKeyDown = (event, project) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openMedia(project);
+    }
+  };
+
   return (
-    <section
-      id="portfolio"
-      className="relative bg-white text-[#2C2C2C] py-16 sm:py-20 lg:py-28"
-    >
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-        {/* HEADER */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-          <div>
-            <p className="text-xs sm:text-sm tracking-[0.3em] text-[#FF9800] py-6">
-              ALL WORK
+    <>
+      {/* PORTFOLIO SECTION */}
+      <section
+        id="portfolio"
+        className="relative bg-white text-[#2C2C2C] py-16 sm:py-20 lg:py-28"
+      >
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+          {/* HEADER */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+            <div>
+              <p className="text-xs sm:text-sm tracking-[0.3em] text-[#FF9800] py-6">
+                ALL WORK
+              </p>
+
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[0.9] tracking-tight">
+                Selected{" "}
+                <span className="font-semibold italic text-[#FF9800]">
+                  Work.
+                </span>
+              </h2>
+            </div>
+
+            <p className="max-w-md text-sm sm:text-base text-[#2C2C2C]/55 leading-relaxed">
+              A selection of creative work showcasing our approach to branding,
+              photography, video, and digital media.
             </p>
-
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[0.9] tracking-tight">
-              Selected{" "}
-              <span className="font-semibold italic text-[#FF9800]">Work.</span>
-            </h2>
           </div>
 
-          <p className="max-w-md text-sm sm:text-base text-[#2C2C2C]/55 leading-relaxed">
-            A selection of creative work showcasing our approach to branding,
-            photography, video, and digital media.
-          </p>
-        </div>
-
-        {/* MAIN CATEGORY FILTER */}
-        <div className="mb-5">
-          <div className="flex flex-wrap gap-2 sm:gap-3">
-            {categories.map((category) => {
-              const isActive = selectedCategory === category.value;
-
-              return (
-                <button
-                  key={category.value}
-                  type="button"
-                  onClick={() => handleCategoryChange(category.value)}
-                  className={`
-                    px-4
-                    sm:px-6
-                    py-2.5
-                    text-[10px]
-                    sm:text-xs
-                    tracking-[0.12em]
-                    uppercase
-                    border
-                    transition-all
-                    duration-300
-                    ${
-                      isActive
-                        ? "bg-[#FF9800] border-[#FF9800] text-[#2C2C2C]"
-                        : "border-[#2C2C2C]/15 text-[#2C2C2C]/60 hover:border-[#FF9800] hover:text-[#FF9800]"
-                    }
-                  `}
-                >
-                  {category.name}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* SUBCATEGORY FILTER */}
-        {selectedCategory !== "all" && currentSubcategories.length > 0 && (
-          <div className="mb-12">
-            <div className="flex flex-wrap gap-x-5 gap-y-3 items-center">
-              {currentSubcategories.map((subcategory) => {
-                const isActive = selectedSubcategory === subcategory;
+          {/* MAIN CATEGORY FILTER */}
+          <div className="mb-5">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
+              {categories.map((category) => {
+                const isActive = selectedCategory === category.value;
 
                 return (
                   <button
-                    key={subcategory}
+                    key={category.value}
                     type="button"
-                    onClick={() => setSelectedSubcategory(subcategory)}
+                    onClick={() => handleCategoryChange(category.value)}
                     className={`
+                      px-4
+                      sm:px-6
+                      py-2.5
+                      text-[10px]
+                      sm:text-xs
+                      tracking-[0.12em]
+                      uppercase
+                      border
+                      transition-all
+                      duration-300
+                      ${
+                        isActive
+                          ? "bg-[#FF9800] border-[#FF9800] text-[#2C2C2C]"
+                          : "border-[#2C2C2C]/15 text-[#2C2C2C]/60 hover:border-[#FF9800] hover:text-[#FF9800]"
+                      }
+                    `}
+                  >
+                    {category.name}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* SUBCATEGORY FILTER */}
+          {selectedCategory !== "all" && currentSubcategories.length > 0 && (
+            <div className="mb-12">
+              <div className="flex flex-wrap gap-x-5 gap-y-3 items-center">
+                {currentSubcategories.map((subcategory) => {
+                  const isActive = selectedSubcategory === subcategory;
+
+                  return (
+                    <button
+                      key={subcategory}
+                      type="button"
+                      onClick={() => setSelectedSubcategory(subcategory)}
+                      className={`
                         text-[10px]
                         sm:text-xs
                         uppercase
@@ -751,182 +793,186 @@ function Portfolio() {
                             : "text-[#2C2C2C]/40 hover:text-[#2C2C2C]"
                         }
                       `}
-                  >
-                    {subcategory}
-                  </button>
-                );
-              })}
+                    >
+                      {subcategory}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* LOADING */}
-        {loading && (
-          <div className="py-20 text-center">
-            <p className="text-sm text-[#2C2C2C]/50">
-              Loading featured work...
-            </p>
-          </div>
-        )}
+          {/* LOADING */}
+          {loading && (
+            <div className="py-20 text-center">
+              <p className="text-sm text-[#2C2C2C]/50">
+                Loading featured work...
+              </p>
+            </div>
+          )}
 
-        {/* ERROR */}
-        {!loading && error && (
-          <div className="py-20 text-center">
-            <p className="text-sm text-red-600">{error}</p>
-          </div>
-        )}
+          {/* ERROR */}
+          {!loading && error && (
+            <div className="py-20 text-center">
+              <p className="text-sm text-red-600">{error}</p>
+            </div>
+          )}
 
-        {/* NO PROJECTS */}
-        {!loading && !error && filteredProjects.length === 0 && (
-          <div className="py-20 text-center">
-            <p className="text-sm text-[#2C2C2C]/50">{getEmptyMessage()}</p>
-          </div>
-        )}
+          {/* NO PROJECTS */}
+          {!loading && !error && filteredProjects.length === 0 && (
+            <div className="py-20 text-center">
+              <p className="text-sm text-[#2C2C2C]/50">{getEmptyMessage()}</p>
+            </div>
+          )}
 
-        {/* FEATURED PROJECTS */}
-        {!loading && !error && filteredProjects.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project) => (
-              <Link
-                key={project._id}
-                to={`/portfolio/${project._id}`}
-                className="group block"
-              >
-                {/* MEDIA */}
-                <div className="relative overflow-hidden bg-[#F4F2ED] rounded-sm h-[500px]">
-                  {project.video ? (
-                    <div
-                      className="
-                      relative
-                      w-full
-                      h-full
-                      bg-black
-                      rounded-sm
-                      overflow-hidden
-                    "
-                    >
-                      <VideoPlayer
-                        src={project.video}
-                        poster={project.videoThumbnail}
-                        title={project.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  ) : project.image ? (
-                    <div
-                      className="
-                        relative
-                        w-full
-                        h-full
-                        overflow-hidden
-                        rounded-sm
-                        bg-[#F4F2ED]
-                        flex
-                        items-center
-                        justify-center
-                      "
-                    >
-                      <img
-                        src={project.image}
-                        alt={project.title}
+          {/* FEATURED PROJECTS */}
+          {!loading && !error && filteredProjects.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProjects.map((project) => (
+                <div
+                  key={project._id}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => openMedia(project)}
+                  onKeyDown={(event) => handleCardKeyDown(event, project)}
+                  aria-label={`Open ${project.title} fullscreen`}
+                  className="group block cursor-pointer"
+                >
+                  {/* MEDIA */}
+                  <div className="relative overflow-hidden bg-[#F4F2ED] rounded-sm h-[500px]">
+                    {project.video ? (
+                      <div
                         className="
-                        w-full
-                        h-full
-                        object-cover
-                        transition-transform
-                        duration-700
-                        group-hover:scale-105
-                      "
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-sm text-[#2C2C2C]/40">
-                        No media available
-                      </span>
-                    </div>
-                  )}
+                          relative
+                          w-full
+                          h-full
+                          bg-black
+                          rounded-sm
+                          overflow-hidden
+                        "
+                      >
+                        <VideoPlayer
+                          src={project.video}
+                          poster={project.videoThumbnail}
+                          title={project.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ) : project.image ? (
+                      <div
+                        className="
+                          relative
+                          w-full
+                          h-full
+                          overflow-hidden
+                          rounded-sm
+                          bg-[#F4F2ED]
+                          flex
+                          items-center
+                          justify-center
+                        "
+                      >
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="
+                            w-full
+                            h-full
+                            object-cover
+                            transition-transform
+                            duration-700
+                            group-hover:scale-105
+                          "
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <span className="text-sm text-[#2C2C2C]/40">
+                          No media available
+                        </span>
+                      </div>
+                    )}
 
-                  {/* Orange Overlay */}
-                  <div
-                    className="
-                    absolute
-                    inset-0
-                    bg-[#FF9800]/0
-                    group-hover:bg-[#FF9800]/10
-                    transition-all
-                    duration-500
-                    pointer-events-none
-                  "
-                  />
-
-                  {/* CATEGORY */}
-                  <div className="absolute top-4 left-4">
-                    <span
+                    {/* ORANGE OVERLAY */}
+                    <div
                       className="
-                      inline-block
-                      bg-white
-                      text-[#2C2C2C]
-                      px-4
-                      py-3
-                      text-[10px]
-                      font-medium
-                      tracking-[0.18em]
-                      uppercase
-                    "
-                    >
-                      {Array.isArray(project.category)
-                        ? project.category[0]
-                        : project.category}
-                    </span>
-                  </div>
+                        absolute
+                        inset-0
+                        bg-[#FF9800]/0
+                        group-hover:bg-[#FF9800]/10
+                        transition-all
+                        duration-500
+                        pointer-events-none
+                      "
+                    />
 
-                  {/* MEDIA INDICATOR */}
-                  {project.video && (
-                    <div className="absolute bottom-4 right-4">
+                    {/* CATEGORY */}
+                    <div className="absolute top-4 left-4">
                       <span
                         className="
-                          bg-[#2C2C2C]/80
-                          text-white
+                          inline-block
+                          bg-white
+                          text-[#2C2C2C]
                           px-4
                           py-3
                           text-[10px]
-                          tracking-[0.15em]
+                          font-medium
+                          tracking-[0.18em]
                           uppercase
-                          backdrop-blur-sm
                         "
                       >
-                        VIDEO
+                        {Array.isArray(project.category)
+                          ? project.category[0]
+                          : project.category}
                       </span>
                     </div>
-                  )}
 
-                  {/* CATALOGUE */}
-                  {project.pdf && !project.video && (
-                    <div className="absolute bottom-4 right-4">
-                      <span
-                        className="
-                        bg-white
-                        text-[#2C2C2C]
-                        px-4
-                        py-3
-                        text-[10px]
-                        tracking-[0.15em]
-                        uppercase
-                      "
-                      >
-                        CATALOGUE
-                      </span>
-                    </div>
-                  )}
-                </div>
+                    {/* MEDIA INDICATOR */}
+                    {project.video && (
+                      <div className="absolute bottom-4 right-4">
+                        <span
+                          className="
+                            bg-[#2C2C2C]/80
+                            text-white
+                            px-4
+                            py-3
+                            text-[10px]
+                            tracking-[0.15em]
+                            uppercase
+                            backdrop-blur-sm
+                          "
+                        >
+                          VIDEO
+                        </span>
+                      </div>
+                    )}
 
-                {/* PROJECT INFO */}
-                <div className="mt-5">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3
-                        className="
+                    {/* CATALOGUE */}
+                    {project.pdf && !project.video && (
+                      <div className="absolute bottom-4 right-4">
+                        <span
+                          className="
+                            bg-white
+                            text-[#2C2C2C]
+                            px-4
+                            py-3
+                            text-[10px]
+                            tracking-[0.15em]
+                            uppercase
+                          "
+                        >
+                          CATALOGUE
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* PROJECT INFO */}
+                  <div className="mt-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <h3
+                          className="
                             text-xl
                             sm:text-2xl
                             font-medium
@@ -935,30 +981,16 @@ function Portfolio() {
                             duration-300
                             group-hover:text-[#FF9800]
                           "
-                      >
-                        {project.title}
-                      </h3>
+                        >
+                          {project.title}
+                        </h3>
 
-                      <p className="mt-2 text-sm text-[#2C2C2C]/50">
-                        {project.client && `${project.client} `}
-                        {project.year && `• ${project.year}`}
-                      </p>
+                        <p className="mt-2 text-sm text-[#2C2C2C]/50">
+                          {project.client && `${project.client} `}
+                          {project.year && `• ${project.year}`}
+                        </p>
+                      </div>
                     </div>
-
-                    {/* Arrow */}
-                    {/* <span
-                      className="
-                          text-xl
-                          text-[#2C2C2C]/30
-                          transition-all
-                          duration-300
-                          group-hover:text-[#FF9800]
-                          group-hover:translate-x-1
-                          group-hover:-translate-y-1
-                        "
-                    >
-                      
-                    </span> */}
                   </div>
 
                   {/* DESCRIPTION */}
@@ -975,15 +1007,15 @@ function Portfolio() {
                         <span
                           key={service}
                           className="
-                                  text-[9px]
-                                  uppercase
-                                  tracking-[0.12em]
-                                  text-[#2C2C2C]/50
-                                  border
-                                  border-[#2C2C2C]/15
-                                  px-2
-                                  py-1
-                                "
+                            text-[9px]
+                            uppercase
+                            tracking-[0.12em]
+                            text-[#2C2C2C]/50
+                            border
+                            border-[#2C2C2C]/15
+                            px-2
+                            py-1
+                          "
                         >
                           {service}
                         </span>
@@ -991,38 +1023,123 @@ function Portfolio() {
                     </div>
                   )}
                 </div>
-              </Link>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
 
-        {/* VIEW ALL */}
-        <div className="flex justify-center mt-16">
-          <Link
-            to="/portfolio"
+          {/* VIEW ALL */}
+          <div className="flex justify-center mt-16">
+            <Link
+              to="/portfolio"
+              className="
+                inline-flex
+                items-center
+                gap-3
+                px-7
+                py-3
+                border
+                border-[#2C2C2C]
+                text-[#2C2C2C]
+                text-xs
+                font-medium
+                tracking-[0.08em]
+                transition-all
+                duration-300
+                hover:bg-[#FF9800]
+                hover:border-[#FF9800]
+              "
+            >
+              VIEW ALL WORK <span className="text-base">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* FULLSCREEN VIDEO / IMAGE VIEWER */}
+      {selectedProject && (
+        <div
+          className="
+            fixed
+            inset-0
+            z-[9999]
+            bg-black
+            flex
+            items-center
+            justify-center
+          "
+          onClick={closeMedia}
+        >
+          {/* CLOSE BUTTON */}
+          <button
+            type="button"
+            onClick={closeMedia}
+            aria-label="Close fullscreen viewer"
             className="
-              inline-flex
+              absolute
+              top-5
+              right-5
+              sm:top-7
+              sm:right-7
+              z-[10000]
+              w-12
+              h-12
+              flex
               items-center
-              gap-3
-              px-7
-              py-3
-              border
-              border-[#2C2C2C]
-              text-[#2C2C2C]
-              text-xs
-              font-medium
-              tracking-[0.08em]
-              transition-all
+              justify-center
+              rounded-full
+              bg-white/10
+              text-white
+              text-3xl
+              font-light
+              hover:bg-white/25
+              transition-colors
               duration-300
-              hover:bg-[#FF9800]
-              hover:border-[#FF9800]
             "
           >
-            VIEW ALL WORK <span className="text-base">→</span>
-          </Link>
+            ×
+          </button>
+
+          {/* FULLSCREEN VIDEO */}
+          {selectedProject.video ? (
+            <div
+              className="
+                w-full
+                h-full
+                flex
+                items-center
+                justify-center
+                bg-black
+              "
+              onClick={(event) => event.stopPropagation()}
+            >
+              <VideoPlayer
+                src={selectedProject.video}
+                poster={selectedProject.videoThumbnail}
+                title={selectedProject.title}
+                className="w-full h-full object-contain"
+              />
+            </div>
+          ) : selectedProject.image ? (
+            /* FULLSCREEN IMAGE / BRANDING */
+            <img
+              src={selectedProject.image}
+              alt={selectedProject.title}
+              className="
+                max-w-full
+                max-h-full
+                w-auto
+                h-auto
+                object-contain
+                select-none
+              "
+              onClick={(event) => event.stopPropagation()}
+            />
+          ) : (
+            <div className="text-white/50 text-sm">No media available.</div>
+          )}
         </div>
-      </div>
-    </section>
+      )}
+    </>
   );
 }
 

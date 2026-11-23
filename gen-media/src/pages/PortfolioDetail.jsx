@@ -2,18 +2,34 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import VideoPlayer from "./VideoPlayer.jsx";
 
-function PortfolioDetail() {
+function PortfolioDetail({ projectData = null, onClose = null }) {
   const { id } = useParams();
 
-  const [project, setProject] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [project, setProject] = useState(projectData);
+  const [loading, setLoading] = useState(!projectData);
   const [error, setError] = useState("");
 
-  // const videoRef = useRef(null);
+  const isOverlay = Boolean(onClose);
+
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   useEffect(() => {
+    // If project data is passed from Portfolio, use it directly.
+    if (projectData) {
+      setProject(projectData);
+      setLoading(false);
+      setError("");
+      return;
+    }
+
+    // Otherwise, load the project normally using the route ID.
     const fetchProject = async () => {
+      if (!id) {
+        setError("Project not found.");
+        setLoading(false);
+        return;
+      }
+
       try {
         setLoading(true);
         setError("");
@@ -25,6 +41,7 @@ function PortfolioDetail() {
         }
 
         const data = await response.json();
+
         console.log("PROJECT:", data);
         console.log("IMAGE:", data.image);
         console.log("VIDEO:", data.video);
@@ -40,78 +57,79 @@ function PortfolioDetail() {
     };
 
     fetchProject();
-  }, [id]);
+  }, [projectData, id, API_URL]);
 
-  // useEffect(() => {
-  //   const video = videoRef.current;
-
-  //   if (!video) return;
-
-  //   const checkVideo = () => {
-  //     console.log("===== VIDEO TEST =====");
-  //     console.log("duration:", video.duration);
-  //     console.log("readyState:", video.readyState);
-  //     console.log("networkState:", video.networkState);
-  //     console.log("error:", video.error);
-  //   };
-
-  //   const handleLoadedMetadata = () => {
-  //     console.log("===== VIDEO METADATA LOADED =====");
-  //     checkVideo();
-  //   };
-
-  //   const handleError = () => {
-  //     console.log("===== VIDEO ERROR =====");
-  //     checkVideo();
-  //   };
-
-  //   video.addEventListener("loadedmetadata", handleLoadedMetadata);
-  //   video.addEventListener("error", handleError);
-
-  //   // Check immediately as well
-  //   checkVideo();
-
-  //   return () => {
-  //     video.removeEventListener("loadedmetadata", handleLoadedMetadata);
-
-  //     video.removeEventListener("error", handleError);
-  //   };
-  // }, [project]);
-
+  // LOADING
   if (loading) {
     return (
-      <main className="min-h-screen bg-[#F8F6F1] flex items-center justify-center">
+      <main
+        className={
+          isOverlay
+            ? "fixed inset-0 z-[100] bg-[#F8F6F1] flex items-center justify-center"
+            : "min-h-screen bg-[#F8F6F1] flex items-center justify-center"
+        }
+      >
         <p className="text-sm text-[#2C2C2C]/50">Loading project...</p>
       </main>
     );
   }
 
+  // ERROR
   if (error || !project) {
     return (
-      <main className="min-h-screen bg-[#F8F6F1] flex flex-col items-center justify-center px-6">
+      <main
+        className={
+          isOverlay
+            ? "fixed inset-0 z-[100] bg-[#F8F6F1] flex flex-col items-center justify-center px-6"
+            : "min-h-screen bg-[#F8F6F1] flex flex-col items-center justify-center px-6"
+        }
+      >
         <p className="text-sm text-red-600 mb-6">
           {error || "Project not found."}
         </p>
 
-        <Link
-          to="/portfolio"
-          className="
-            inline-flex
-            items-center
-            gap-2
-            border
-            border-[#2C2C2C]
-            px-5
-            py-2.5
-            text-sm
-            tracking-[0.1em]
-            hover:bg-[#FF9800]
-            hover:border-[#FF9800]
-            transition-all
-          "
-        >
-          ← BACK TO PORTFOLIO
-        </Link>
+        {isOverlay ? (
+          <button
+            type="button"
+            onClick={onClose}
+            className="
+              inline-flex
+              items-center
+              gap-2
+              border
+              border-[#2C2C2C]
+              px-5
+              py-2.5
+              text-sm
+              tracking-[0.1em]
+              hover:bg-[#FF9800]
+              hover:border-[#FF9800]
+              transition-all
+            "
+          >
+            ← BACK TO PORTFOLIO
+          </button>
+        ) : (
+          <Link
+            to="/portfolio"
+            className="
+              inline-flex
+              items-center
+              gap-2
+              border
+              border-[#2C2C2C]
+              px-5
+              py-2.5
+              text-sm
+              tracking-[0.1em]
+              hover:bg-[#FF9800]
+              hover:border-[#FF9800]
+              transition-all
+            "
+          >
+            ← BACK TO PORTFOLIO
+          </Link>
+        )}
       </main>
     );
   }
@@ -120,12 +138,33 @@ function PortfolioDetail() {
     ? project.category[0]
     : project.category;
 
+  // Back action: close fullscreen or return to portfolio route
+  const BackAction = ({ className = "" }) =>
+    isOverlay ? (
+      <button type="button" onClick={onClose} className={className}>
+        ← BACK TO PORTFOLIO
+      </button>
+    ) : (
+      <Link to="/portfolio" className={className}>
+        ← BACK TO PORTFOLIO
+      </Link>
+    );
+
   return (
-    <main className="min-h-screen bg-[#F8F6F1] text-[#2C2C2C]">
+    <main
+      className={`
+        min-h-screen
+        bg-[#F8F6F1]
+        text-[#2C2C2C]
+        ${isOverlay ? "fixed inset-0 z-[100] overflow-y-auto" : ""}
+      `}
+    >
+      {/* CLOSE BUTTON - OVERLAY ONLY */}
+
+      {/* HEADER */}
       <section className="pt-20 sm:pt-24 pb-6">
         <div className="max-w-6xl mx-auto px-5 sm:px-6">
-          <Link
-            to="/portfolio"
+          <BackAction
             className="
               inline-flex
               items-center
@@ -138,60 +177,19 @@ function PortfolioDetail() {
               duration-300
               mb-5
             "
-          >
-            ← BACK TO PORTFOLIO
-          </Link>
+          />
 
           {/* CATEGORY */}
 
-          {category && (
-            <p
-              className="
-                text-xs
-                tracking-[0.28em]
-                text-[#FF9800]
-                uppercase
-                mb-3
-              "
-            >
-              {category}
+          {project.year && (
+            <p className="text-sm text-[#2C2C2C]/55">
+              <span className="text-[#2C2C2C]/35">YEAR</span> {project.year}
             </p>
           )}
-
-          {/* TITLE */}
-
-          <h1
-            className="
-              text-4xl
-              sm:text-5xl
-              md:text-5xl
-              font-light
-              leading-none
-              tracking-tight
-            "
-          >
-            {project.title}
-          </h1>
-
-          {/* CLIENT / YEAR */}
-
-          <div className="flex flex-wrap gap-6 mt-3">
-            {project.client && (
-              <p className="text-sm text-[#2C2C2C]/55">
-                <span className="text-[#2C2C2C]/35">CLIENT</span>{" "}
-                {project.client}
-              </p>
-            )}
-
-            {project.year && (
-              <p className="text-sm text-[#2C2C2C]/55">
-                <span className="text-[#2C2C2C]/35">YEAR</span> {project.year}
-              </p>
-            )}
-          </div>
         </div>
       </section>
 
+      {/* MEDIA */}
       <section className="pb-8">
         <div className="max-w-6xl mx-auto px-5 sm:px-6">
           {project.video ? (
@@ -228,7 +226,6 @@ function PortfolioDetail() {
               "
             >
               {/* FULL IMAGE */}
-
               <img
                 src={project.image}
                 alt={project.title}
@@ -240,7 +237,6 @@ function PortfolioDetail() {
               />
 
               {/* CATEGORY LABEL */}
-
               {category && (
                 <div className="absolute top-4 left-4">
                   <span
@@ -262,7 +258,6 @@ function PortfolioDetail() {
               )}
 
               {/* CATALOGUE LABEL */}
-
               {project.pdf && (
                 <div className="absolute bottom-4 right-4">
                   <span
@@ -285,6 +280,7 @@ function PortfolioDetail() {
         </div>
       </section>
 
+      {/* PROJECT INFORMATION */}
       <section className="pb-12">
         <div className="max-w-6xl mx-auto px-5 sm:px-6">
           <div
@@ -298,7 +294,6 @@ function PortfolioDetail() {
           >
             <div>
               {/* PROJECT */}
-
               <p
                 className="
                   text-xs
@@ -316,62 +311,7 @@ function PortfolioDetail() {
               </h2>
 
               <div className="mt-5 space-y-4">
-                {/* CLIENT */}
-
-                {project.client && (
-                  <div>
-                    <p
-                      className="
-                        text-xs
-                        uppercase
-                        tracking-[0.15em]
-                        text-[#2C2C2C]/35
-                      "
-                    >
-                      Client
-                    </p>
-
-                    <p
-                      className="
-                        text-sm
-                        text-[#2C2C2C]/65
-                        mt-1
-                      "
-                    >
-                      {project.client}
-                    </p>
-                  </div>
-                )}
-
-                {/* YEAR */}
-
-                {project.year && (
-                  <div>
-                    <p
-                      className="
-                        text-xs
-                        uppercase
-                        tracking-[0.15em]
-                        text-[#2C2C2C]/35
-                      "
-                    >
-                      Year
-                    </p>
-
-                    <p
-                      className="
-                        text-sm
-                        text-[#2C2C2C]/65
-                        mt-1
-                      "
-                    >
-                      {project.year}
-                    </p>
-                  </div>
-                )}
-
                 {/* CATEGORY */}
-
                 {category && (
                   <div>
                     <p
@@ -399,17 +339,16 @@ function PortfolioDetail() {
               </div>
 
               {/* SERVICES */}
-
               {project.services && project.services.length > 0 && (
                 <div className="mt-6">
                   <p
                     className="
-                        text-xs
-                        uppercase
-                        tracking-[0.15em]
-                        text-[#2C2C2C]/35
-                        mb-3
-                      "
+                      text-xs
+                      uppercase
+                      tracking-[0.15em]
+                      text-[#2C2C2C]/35
+                      mb-3
+                    "
                   >
                     Services
                   </p>
@@ -419,15 +358,15 @@ function PortfolioDetail() {
                       <span
                         key={service}
                         className="
-                            border
-                            border-[#2C2C2C]/15
-                            px-2.5
-                            py-1.5
-                            text-[10px]
-                            uppercase
-                            tracking-[0.08em]
-                            text-[#2C2C2C]/55
-                          "
+                          border
+                          border-[#2C2C2C]/15
+                          px-2.5
+                          py-1.5
+                          text-[10px]
+                          uppercase
+                          tracking-[0.08em]
+                          text-[#2C2C2C]/55
+                        "
                       >
                         {service}
                       </span>
@@ -437,7 +376,6 @@ function PortfolioDetail() {
               )}
 
               {/* PDF */}
-
               {project.pdf && (
                 <div className="mt-7">
                   <a
@@ -468,6 +406,7 @@ function PortfolioDetail() {
               )}
             </div>
 
+            {/* DESCRIPTION */}
             <div>
               {project.description && (
                 <>
@@ -501,6 +440,7 @@ function PortfolioDetail() {
         </div>
       </section>
 
+      {/* BOTTOM BACK */}
       <section
         className="
           border-t
@@ -516,8 +456,7 @@ function PortfolioDetail() {
             py-7
           "
         >
-          <Link
-            to="/portfolio"
+          <BackAction
             className="
               inline-flex
               items-center
@@ -528,9 +467,7 @@ function PortfolioDetail() {
               hover:text-[#FF9800]
               transition-colors
             "
-          >
-            ← BACK TO ALL WORK
-          </Link>
+          />
         </div>
       </section>
     </main>
