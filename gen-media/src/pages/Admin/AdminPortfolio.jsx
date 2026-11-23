@@ -7,7 +7,7 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const emptyForm = {
   title: "",
   category: [],
-  
+
   subcategory: [],
   description: "",
   image: "",
@@ -27,6 +27,7 @@ const categoryOptions = [
   "Photography",
   "Video Editing",
   "Motion Graphics",
+  "Wedding Videography",
   "Digital Content",
 ];
 
