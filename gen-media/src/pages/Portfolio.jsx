@@ -524,7 +524,6 @@ const subcategories = {
     "All",
     "Long Form Video",
     "Short Form Video",
-    "Motion Graphics",
     "Commercials",
   ],
   photography: [
