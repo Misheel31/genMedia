@@ -520,12 +520,7 @@ const subcategories = {
     "Social Media Design",
     "Advertising Design",
   ],
-  video: [
-    "All",
-    "Long Form Video",
-    "Short Form Video",
-    "Commercials",
-  ],
+  video: ["All", "Long Form Video", "Short Form Video", "Commercials"],
   photography: [
     "All",
     "Product Photography",
@@ -635,8 +630,7 @@ function Portfolio() {
           if (selectedCategory === "video") {
             return (
               normalizedCategory === "video" ||
-              normalizedCategory === "video editing" ||
-              normalizedCategory === "motion graphics"
+              normalizedCategory === "video editing"
             );
           }
 
